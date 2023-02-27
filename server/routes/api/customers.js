@@ -1,14 +1,13 @@
 const router = require('express').Router();
 const customerController = require('../../controllers/customerController');
-const authenticate = require('../../middleware/authenticate');
 
 router.route('/')
-    .get(authenticate.token, customerController.findAll)
-    .post(authenticate.token, customerController.create)
+    .get(customerController.findAll)
+    .post(customerController.create)
 
 router.route('/:id')
-    .get(authenticate.token, customerController.findById)
-    .put(authenticate.token, customerController.updateById)
-    .delete(authenticate.token, customerController.delete)
+    .get(customerController.findById)
+    .put(customerController.updateById)
+    .delete(customerController.delete)
 
 module.exports = router;

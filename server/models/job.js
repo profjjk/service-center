@@ -1,16 +1,21 @@
-const mongoose = require('mongoose');
+const { Schema, Types, model } = require('mongoose');
 
-const jobSchema = new mongoose.Schema({
-    customer: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer', required: true },
-    serviceDate: { type: String },
+const jobSchema = new Schema({
+    company: { type: Types.ObjectId, ref: 'Company', required: true },
+    customer: { type: Types.ObjectId, ref: 'Customer', required: true },
+    serviceDate: { type: Date },
     invoiceNumber: { type: String, index: true },
     issueNotes: String,
     serviceNotes: String,
-    status: { type: String, default: 'Pending' },
+    status: {
+        type: String,
+        enum: ['Pending', 'Scheduled', 'Completed', 'Canceled'],
+        default: 'Pending'
+    },
     totalBill: { type: Number, default: 0 },
     isPaid: { type: Boolean, default: false }
 }, { timestamps: true });
 
-const Job = mongoose.model('Job', jobSchema);
+const Job = model('Job', jobSchema);
 
 module.exports = Job;

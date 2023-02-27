@@ -1,9 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
-
-// const routes = require('./routes');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -13,6 +10,7 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
+const cors = require('cors');
 app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +20,8 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
-// app.use(routes);
+const routes = require('./routes');
+app.use(routes);
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("Connected to Service Center database."))
