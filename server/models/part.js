@@ -1,19 +1,12 @@
-import { Schema, model } from 'mongoose';
+const mongoose = require('mongoose');
 
-interface IPart {
-    partNumber: string,
-    description: string,
-    stock?: number,
-    minimum?: number
-}
-
-const partSchema = new Schema<IPart>({
+const partSchema = new mongoose.Schema({
     partNumber: { type: String, required: [true, 'Part # required'], index: true },
     description: { type: String, required: [true, 'Description required'] },
     stock: { type: Number, default: 0 },
     minimum: { type: Number, default: 0 }
 }, { timestamps: true });
 
-const Part = model<IPart>('Part', partSchema);
+const Part = mongoose.model('Part', partSchema);
 
-export default Part;
+module.exports = Part;
