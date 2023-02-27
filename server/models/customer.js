@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require('mongoose');
+const { Schema, Types , model} = require('mongoose');
 
 const customerSchema = new Schema({
     company: { type: Types.ObjectId, ref: 'Company', required: true },

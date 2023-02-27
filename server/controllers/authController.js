@@ -5,24 +5,23 @@ require('dotenv').config()
 
 module.exports = {
     register: async (req, res) => {
-        const { username, password } = req.body;
+        const { companyName, username, password } = req.body;
         try {
-            const userExists = await db.User.findOne({ username });
-            if (userExists) res.status(400).send(`Username "${username}" already exists.`);
-            const user = await db.User.create({
+            const newCompany = await db.Company.create({ companyName });
+            const newUser = await db.User.create({
+                "company": newCompany._id,
                 username,
-                password: await bcrypt.hash(password, 10)
+                "password": await bcrypt.hash(password, 10)
             });
-            res.status(201).json(user);
-        } catch(err) { res.status(422).json({ msg: err}) }
+            res.status(201).res.json({ newCompany, newUser });
+        } catch(err) { res.status(422).json({ msg: err }) }
     },
 
     login: async (req, res) => {
         const user = { _id: req.user };
-        console.log(req)
         try {
             const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '24 hours' });
             res.status(201).json({ _id: user._id, token: token });
-        } catch(err) { res.status(422).json({ msg: err}) }
+        } catch(err) { res.status(422).json({ msg: err }) }
     },
 }

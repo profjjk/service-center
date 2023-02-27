@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
 const routes = require('./routes');
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017")
     .then(() => console.log("Connected to Service Center database."))
     .catch(err => console.log("Failed to connect to database." + "\n" + `Error: ${err.message}`));
 
