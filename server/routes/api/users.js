@@ -10,7 +10,4 @@ router.route('/:id')
     .put(userController.update)
     .delete(userController.delete)
 
-router.route('/:username')
-    .get(userController.findOne)
-
 module.exports = router;

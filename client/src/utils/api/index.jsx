@@ -1,9 +1,17 @@
 import axios from 'axios';
+import { getStoredToken } from '../storage';
 
-let baseUrl = 'http://localhost:3000/';
+let baseUrl = 'http://localhost:8080/api';
 
 const userUrl = `${baseUrl}/users`;
 const authUrl = `${baseUrl}/auth`;
+
+const authHeader = () => {
+    const token = getStoredToken().token;
+    if (token) {
+        return { 'service-center': token };
+    }
+}
 
 export const API = {
     // USERS

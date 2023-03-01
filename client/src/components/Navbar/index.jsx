@@ -1,9 +1,10 @@
 import { Link, NavLink } from 'react-router-dom';
-import { useState } from 'react';
 import './style.scss';
+import { useUser, useAuth } from '../../react-query';
 
 export const Navbar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const { user } = useUser();
+    const { logout } = useAuth();
 
     const links = [
         { path: '/dashboard', text: 'Dashboard' },
@@ -20,7 +21,7 @@ export const Navbar = () => {
                 </div>
 
                 <ul>
-                    {isLoggedIn &&
+                    {user &&
                         links.map(({ path, text}) => (
                             <li key={path} className={'nav-item'}>
                                 <NavLink to={path}>
@@ -32,12 +33,12 @@ export const Navbar = () => {
                 </ul>
 
                 <div>
-                    {isLoggedIn ? (
-                        <Link to={'/auth'} onClick={() => setIsLoggedIn(false)}>
+                    {user ? (
+                        <a onClick={() => logout()}>
                             Logout
-                        </Link>
+                        </a>
                     ) : (
-                        <Link to={'/auth'} onClick={() => setIsLoggedIn(true)}>
+                        <Link to={'/auth'}>
                             Login / Register
                         </Link>
                     )}

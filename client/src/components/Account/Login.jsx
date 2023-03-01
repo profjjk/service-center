@@ -1,26 +1,24 @@
 import './style.scss';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useAuth } from '../../react-query';
 
 export const LoginForm = ({ setIsNew }) => {
-    const [isAuth, setIsAuth] = useState(false);
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const submitHandler = async (e) => {
         e.preventDefault();
-
         const notFound = document.querySelector("#invalid");
-
         const formData = Object.fromEntries(new FormData(e.target));
-        console.log(formData);
 
-        // if (isAuth) {
-        //     navigate("/dashboard");
-        // } else {
-        //     notFound.classList.add('error')
-        // }
-
-        navigate("/dashboard");
+        try {
+            const auth = await login(formData);
+            if (!!auth) {
+                navigate("/dashboard")
+            } else {
+                notFound.classList.add('error')
+            }
+        } catch(err) { console.error(err) }
     }
 
     return (
@@ -35,11 +33,11 @@ export const LoginForm = ({ setIsNew }) => {
 
                 <form className={"card-form"} onSubmit={submitHandler}>
                     <label>
-                        Username
+                        Email
                         <input
-                            type={"text"}
-                            name={"username"}
-                            defaultValue={"Demo"}
+                            type={"email"}
+                            name={"email"}
+                            defaultValue={"demo@demo.com"}
                             required
                         />
                     </label>

@@ -9,25 +9,19 @@ module.exports = {
         } catch(err) { res.status(422).json({ msg: err}) }
     },
 
-    findOne: async (req, res) => {
-        try {
-            const data = await db.User.findOne({ username: req.params.username }).select('-password');
-            res.status(200).json(data);
-        } catch(err) { res.status(422).json({ msg: err }) }
-    },
-
     findById: async (req, res) => {
         try {
-            const data = await db.User.findById({ _id: req.params.id }).select('-password');
+            const data = await db.User.findById({ _id: req.params.id }).select(['-password', '-createdAt', '-updatedAt']);
             res.status(200).json(data);
         } catch(err) { res.status(422).json({ msg: err }) }
     },
 
     create: async (req, res) => {
-        const { company, username, password } = req.body;
+        const { company, email, username, password } = req.body;
         try {
             const newUser = await db.User.create({
                 company,
+                email,
                 username,
                 "password": await bcrypt.hash(password, 10)
             });
