@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const authController = require('../../controllers/authController');
+const authenticate = require('../../middleware/authenticate');
 
 router.route('/login')
-    .post(authController.login)
+    .post(authenticate.user, authController.login)
 
 router.route('/register')
     .post(authController.register)
