@@ -1,8 +1,26 @@
 import './style.scss';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export const LoginForm = ({ setIsNew }) => {
+    const [isAuth, setIsAuth] = useState(false);
+    const navigate = useNavigate();
+
     const submitHandler = async (e) => {
-        console.log(e.target)
+        e.preventDefault();
+
+        const notFound = document.querySelector("#invalid");
+
+        const formData = Object.fromEntries(new FormData(e.target));
+        console.log(formData);
+
+        // if (isAuth) {
+        //     navigate("/dashboard");
+        // } else {
+        //     notFound.classList.add('error')
+        // }
+
+        navigate("/dashboard");
     }
 
     return (
@@ -36,6 +54,10 @@ export const LoginForm = ({ setIsNew }) => {
                         />
                     </label>
 
+                    <p id={"invalid"}>
+                        Username or password incorrect.
+                    </p>
+
                     <button
                         className={"btn-login"}
                         type={"submit"}
@@ -45,7 +67,9 @@ export const LoginForm = ({ setIsNew }) => {
                 </form>
 
                 <div className={"card-footer"}>
-                    <p>Forgot your password?</p>
+                    <p>
+                        Forgot your password?
+                    </p>
                 </div>
             </div>
     )

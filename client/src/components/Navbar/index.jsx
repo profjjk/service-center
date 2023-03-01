@@ -20,26 +20,27 @@ export const Navbar = () => {
                 </div>
 
                 <ul>
-                    {
-                        isLoggedIn &&
+                    {isLoggedIn &&
                         links.map(({ path, text}) => (
-                                <li key={path} className={'nav-item'}>
-                                    <NavLink to={path}>
-                                        {text}
-                                    </NavLink>
-                                </li>
-                            )
-                        )
+                            <li key={path} className={'nav-item'}>
+                                <NavLink to={path}>
+                                    {text}
+                                </NavLink>
+                            </li>
+                        ))
                     }
-
                 </ul>
 
                 <div>
-                    {
-                        isLoggedIn ?
-                        <Link to={'/auth'} onClick={() => setIsLoggedIn(false)}>Logout</Link> :
-                        <Link to={'/auth'} onClick={() => setIsLoggedIn(true)}>Login / Register</Link>
-                    }
+                    {isLoggedIn ? (
+                        <Link to={'/auth'} onClick={() => setIsLoggedIn(false)}>
+                            Logout
+                        </Link>
+                    ) : (
+                        <Link to={'/auth'} onClick={() => setIsLoggedIn(true)}>
+                            Login / Register
+                        </Link>
+                    )}
                 </div>
             </nav>
         </header>

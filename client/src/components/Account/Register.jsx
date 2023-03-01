@@ -19,8 +19,9 @@ export const RegisterForm = ({ setIsNew }) => {
     }, [isError]);
 
     const submitHandler = async (e) => {
+        e.preventDefault();
         const formData = Object.fromEntries(new FormData(e.target));
-        console.log(formData)
+        console.log(formData);
     }
 
     const validatePassword = (e) => {
@@ -59,6 +60,15 @@ export const RegisterForm = ({ setIsNew }) => {
                     <input
                         type={"text"}
                         name={"username"}
+                        required
+                    />
+                </label>
+
+                <label>
+                    Email
+                    <input
+                        type={"email"}
+                        name={"email"}
                         required
                     />
                 </label>
