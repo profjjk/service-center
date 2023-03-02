@@ -1,9 +1,9 @@
 const db = require('../models');
 
 module.exports = {
-    findAll: async (req, res) => {
+    findAllByCompany: async (req, res) => {
         try {
-            const data = await db.Customer.find().sort({ updatedAt: -1 });
+            const data = await db.Customer.find({ company: req.params.id }).sort({ updatedAt: -1 });
             res.json(data);
         } catch(err) { res.status(422).json({ msg: err}) }
     },

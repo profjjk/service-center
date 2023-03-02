@@ -1,7 +1,7 @@
 import './style.scss';
 import { useEffect, useState } from 'react';
 
-export const RegisterForm = ({ setIsNew }) => {
+export const RegistrationForm = ({ setIsNew }) => {
     const [isError, setIsError] = useState(false);
 
     useEffect(() => {

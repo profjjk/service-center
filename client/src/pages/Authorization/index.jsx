@@ -1,4 +1,4 @@
-import { LoginForm, RegisterForm } from '../../components';
+import { LoginForm, RegistrationForm } from '../../components';
 import { useState } from 'react';
 import { useUser } from '../../react-query';
 import { useNavigate } from 'react-router-dom';
@@ -16,11 +16,11 @@ export const Authorization = () => {
 
     return (
         <main id={"auth-page"}>
-            {
-                isNew ?
-                    <RegisterForm setIsNew={setIsNew} /> :
-                    <LoginForm setIsNew={setIsNew} />
-            }
+            {isNew ? (
+                <RegistrationForm setIsNew={setIsNew} />
+                ) : (
+                <LoginForm setIsNew={setIsNew} />
+            )}
         </main>
     )
 }

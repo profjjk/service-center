@@ -3,10 +3,10 @@ import { clearStoredToken, clearStoredUser, getStoredUser, setStoredUser } from 
 import { useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
-const getUser = async (id) => {
+const getUser = async (userId) => {
     try {
-        if (id) {
-            const { data } = await API.getUser(id);
+        if (userId) {
+            const { data } = await API.getUser(userId);
             return data;
         }
     } catch(err) {
