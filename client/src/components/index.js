@@ -1,2 +1,7 @@
 export { Navbar } from './Navbar';
-export { LoginForm, RegisterForm } from './Account';
+export {
+    LoginForm,
+    RegistrationForm,
+    CustomerForm
+} from './Forms';
+export { CustomerTable } from './Tables';

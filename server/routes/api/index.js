@@ -7,7 +7,7 @@ const userRoutes = require('./users');
 const companyRoutes = require('./companies');
 const authRoutes = require('./auth');
 
-router.use('/Customers', customerRoutes);
+router.use('/customers', customerRoutes);
 router.use('/jobs', jobRoutes);
 router.use('/parts', partRoutes);
 router.use('/users', userRoutes);

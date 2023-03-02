@@ -64,11 +64,11 @@ export const LoginForm = ({ setIsNew }) => {
                     </button>
                 </form>
 
-                <div className={"card-footer"}>
-                    <p>
-                        Forgot your password?
-                    </p>
-                </div>
+                {/*<div className={"card-footer"}>*/}
+                {/*    <p>*/}
+                {/*        Forgot your password?*/}
+                {/*    </p>*/}
+                {/*</div>*/}
             </div>
     )
 }

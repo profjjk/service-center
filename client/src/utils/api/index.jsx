@@ -5,6 +5,7 @@ let baseUrl = 'http://localhost:8080/api';
 
 const userUrl = `${baseUrl}/users`;
 const authUrl = `${baseUrl}/auth`;
+const customerUrl = `${baseUrl}/customers`;
 
 const authHeader = () => {
     const token = getStoredToken().token;
@@ -14,6 +15,20 @@ const authHeader = () => {
 }
 
 export const API = {
+    // CUSTOMERS
+    getCustomers(companyId) {
+        return axios.get(`${customerUrl}/${companyId}`);
+    },
+    createCustomer(data) {
+        return axios.post(customerUrl, data);
+    },
+    updateCustomer(id, data) {
+        return axios.put(`${customerUrl}/${id}`, data);
+    },
+    deleteCustomer(id) {
+        return axios.delete(`${customerUrl}/${id}`);
+    },
+
     // USERS
     getUser(id) {
         return axios.get(`${userUrl}/${id}`);
