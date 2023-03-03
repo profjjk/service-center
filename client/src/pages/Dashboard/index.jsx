@@ -1,14 +1,12 @@
-import { useEffect } from 'react';
-import { useUser } from '../../react-query';
+import { useUser } from '../../components';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export const Dashboard = () => {
     const { user } = useUser();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!user) navigate("/auth")
-    }, [user]);
+    if (!user) navigate('/auth');
 
     return (
         <main>

@@ -1,4 +1,4 @@
-import { API } from '../../utils/api';
+import { API } from '../../utils';
 import { useQuery, useQueryClient } from 'react-query';
 import { getStoredUser } from '../../utils/storage';
 

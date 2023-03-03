@@ -1,6 +1,7 @@
-import { LoginForm, RegistrationForm } from '../../components';
+import { RegistrationForm } from '../../components';
+import { Login } from '../../components';
 import { useState } from 'react';
-import { useUser } from '../../react-query';
+import { useUser } from '../../components';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import './style.scss';
@@ -19,7 +20,7 @@ export const Authorization = () => {
             {isNew ? (
                 <RegistrationForm setIsNew={setIsNew} />
                 ) : (
-                <LoginForm setIsNew={setIsNew} />
+                <Login setIsNew={setIsNew} />
             )}
         </main>
     )

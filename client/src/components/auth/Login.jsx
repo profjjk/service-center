@@ -1,29 +1,33 @@
-import './style.scss';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../react-query';
+import { useAuth } from './hooks/useAuth';
+import { useUser } from '../user';
+import './style.scss';
 
-export const LoginForm = ({ setIsNew }) => {
+export const Login = ({ setIsNew }) => {
     const { login } = useAuth();
+    const { user } = useUser();
     const navigate = useNavigate();
+
+    if (user) navigate(-1);
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        const notFound = document.querySelector("#invalid");
+        const notFound = document.querySelector('#invalid');
         const formData = Object.fromEntries(new FormData(e.target));
 
         try {
-            const auth = await login(formData);
-            if (!!auth) {
-                navigate("/dashboard")
+            const authorization = await login(formData);
+            if (!authorization) {
+                notFound.classList.add('error');
             } else {
-                notFound.classList.add('error')
+                navigate('/dashboard')
             }
         } catch(err) { console.error(err) }
     }
 
     return (
-            <div className={"card-auth"}>
-                <div className={"card-header"}>
+            <div className={'card-auth'}>
+                <div className={'card-header'}>
                     <h2>Login</h2>
                     <p>
                         Don't have an account?
@@ -31,13 +35,13 @@ export const LoginForm = ({ setIsNew }) => {
                     </p>
                 </div>
 
-                <form className={"card-form"} onSubmit={submitHandler}>
+                <form className={'card-form'} onSubmit={submitHandler}>
                     <label>
                         Email
                         <input
-                            type={"email"}
-                            name={"email"}
-                            defaultValue={"demo@demo.com"}
+                            type={'email'}
+                            name={'email'}
+                            defaultValue={'demo@demo.com'}
                             required
                         />
                     </label>
@@ -45,26 +49,26 @@ export const LoginForm = ({ setIsNew }) => {
                     <label>
                         Password
                         <input
-                            type={"password"}
-                            name={"password"}
-                            defaultValue={"password"}
+                            type={'password'}
+                            name={'password'}
+                            defaultValue={'password'}
                             required
                         />
                     </label>
 
-                    <p id={"invalid"}>
+                    <p id={'invalid'}>
                         Username or password incorrect.
                     </p>
 
                     <button
-                        className={"btn-login"}
-                        type={"submit"}
+                        className={'btn-login'}
+                        type={'submit'}
                     >
                         LOGIN
                     </button>
                 </form>
 
-                {/*<div className={"card-footer"}>*/}
+                {/*<div className={'card-footer'}>*/}
                 {/*    <p>*/}
                 {/*        Forgot your password?*/}
                 {/*    </p>*/}

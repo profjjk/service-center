@@ -1,5 +1,10 @@
-import { API } from '../../utils/api';
-import { clearStoredToken, clearStoredUser, getStoredUser, setStoredUser } from '../../utils/storage';
+import {
+    API,
+    clearStoredToken,
+    getStoredUser,
+    clearStoredUser,
+    setStoredUser
+} from '../../../utils';
 import { useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
