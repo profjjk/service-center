@@ -1,4 +1,4 @@
-import { useUser } from '../../react-query';
+import { useUser } from '../../components';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 

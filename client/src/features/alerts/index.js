@@ -1,0 +1,1 @@
+export { MatchAlert } from './MatchAlert';

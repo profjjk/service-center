@@ -1,8 +1,8 @@
-import { useUser, useCustomers } from '../../react-query';
+import { useCustomers } from '../../react-query';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { CustomerTable, CustomerForm } from '../../components';
-import { Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import { useUser, CustomerForm } from '../../components';
+import { Table } from '../../layouts';
 import './style.scss';
 
 export const Customers = () => {
@@ -11,18 +11,20 @@ export const Customers = () => {
     const { data: customers } = useCustomers();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        console.log(selectedCustomer)
-        // if (!user) navigate("/auth")
-    }, [user, selectedCustomer]);
+    if (!user) navigate('/auth');
+
+    const tableHeaders = ['Business Name', 'Address', 'Contact', 'Phone #'];
 
     return (
         <main>
             <h1>Customers Page</h1>
-            {!selectedCustomer && <CustomerTable
-                customers={customers ? customers : []}
-                setSelectedCustomer={setSelectedCustomer}
-            />}
+            {!selectedCustomer && customers &&
+                <Table
+                    headers={tableHeaders}
+                    rows={customers}
+                    type={'customer'}
+                />
+            }
 
             {selectedCustomer && <CustomerForm
                 customer={selectedCustomer}

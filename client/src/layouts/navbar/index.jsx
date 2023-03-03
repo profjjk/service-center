@@ -1,10 +1,10 @@
 import { Link, NavLink } from 'react-router-dom';
+import { useAuth, useUser } from '../../components'
 import './style.scss';
-import { useUser, useAuth } from '../../react-query';
 
 export const Navbar = () => {
-    const { user } = useUser();
     const { logout } = useAuth();
+    const { user } = useUser();
 
     const links = [
         { path: '/dashboard', text: 'Dashboard' },
