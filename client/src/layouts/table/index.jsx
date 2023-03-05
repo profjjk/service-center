@@ -13,10 +13,10 @@ export const Table = ({ headers, rows, type }) => {
             </thead>
 
             <tbody className={type}>
-                {rows.map((row) => (
-                    <tr className={`tr-${type} clickable`} key={row._id}>
-                        {type === 'customer' && <CustomerDataRow customer={row} />}
-                        {type === 'job' && <JobDataRow job={row} />}
+                {rows.map((r) => (
+                    <tr className={`tr-${type} clickable`} key={r._id}>
+                        {type === 'customer' && <CustomerDataRow customer={r} />}
+                        {type === 'job' && <JobDataRow job={r} />}
                     </tr>
                 ))}
             </tbody>
@@ -27,14 +27,14 @@ export const Table = ({ headers, rows, type }) => {
 const CustomerDataRow = ({ customer }) => {
     return (
         <>
-            <td>{customer.businessName}</td>
+            <td>{customer?.businessName}</td>
             <td>
-                {customer.address.street1}
-                {customer.address.street2 !== '' ? ', ' + customer.address.street2 + ', ' : ', '}
-                {customer.address.city}, {customer.address.state} {customer.address.zipcode}
+                {customer?.address?.street1}
+                {customer?.address?.street2 !== '' ? ', ' + customer?.address?.street2 + ', ' : ', '}
+                {customer?.address?.city}, {customer?.address?.state} {customer?.address?.zipcode}
             </td>
-            <td>{customer.contactName ? customer.contactName : '--'}</td>
-            <td>{customer.phone}</td>
+            <td>{customer?.contactName ? customer?.contactName : '--'}</td>
+            <td>{customer?.phone}</td>
         </>
     )
 }
@@ -42,11 +42,11 @@ const CustomerDataRow = ({ customer }) => {
 const JobDataRow = ({ job }) => {
     return (
         <>
-            <td>{job.serviceDate ? dayjs(job.serviceDate).format('MMM D, YYYY') : '--'}</td>
-            <td>{job.customer.businessName}</td>
-            <td>{job.customer.address.city}</td>
-            <td>{job.invoiceNumber ? job.invoiceNumber : '--'}</td>
-            <td>{job.status}</td>
+            <td>{job?.serviceDate ? dayjs(job?.serviceDate).format('MMM D, YYYY') : '--'}</td>
+            <td>{job?.customer?.businessName}</td>
+            <td>{job?.customer?.address?.city}</td>
+            <td>{job?.invoiceNumber ? job?.invoiceNumber : '--'}</td>
+            <td>{job?.status}</td>
         </>
     )
 }

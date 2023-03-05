@@ -2,13 +2,13 @@ const router = require('express').Router();
 const jobController = require('../../controllers/jobController');
 
 router.route('/')
-    .get(jobController.findAll)
+    .get(jobController.findAllByCompanyId)
     .post(jobController.create);
 
 router.route('/:id')
     .get(jobController.findById)
     .put(jobController.updateById)
-    .delete(jobController.delete);
+    .delete(jobController.deleteById);
 
 router.route('/clear/:id')
     .delete(jobController.deleteMany);

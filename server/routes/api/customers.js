@@ -5,8 +5,8 @@ router.route('/')
     .post(customerController.create)
 
 router.route('/:id')
-    .get(customerController.findAllByCompany)
+    .get(customerController.findAllByCompanyId)
     .put(customerController.updateById)
-    .delete(customerController.delete)
+    .delete(customerController.deleteById)
 
 module.exports = router;

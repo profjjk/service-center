@@ -1,6 +1,6 @@
-export { Home } from './Home';
-export { Dashboard } from './Dashboard';
-export { Customers } from './Customers';
-export { Services } from './Services';
-export { Inventory } from './Inventory';
-export { Authorization } from './Authorization';
+export { Home } from './home';
+export { Dashboard } from './dashboard';
+export { default as Customers } from './customers';
+export { Services } from './jobs';
+export { Inventory } from './inventory';
+export { Authorization } from './authorization';

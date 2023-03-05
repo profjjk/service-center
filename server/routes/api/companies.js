@@ -7,7 +7,7 @@ router.route('/')
 
 router.route('/:id')
     .get(companyController.findById)
-    .put(companyController.update)
-    .delete(companyController.delete)
+    .put(companyController.updateById)
+    .delete(companyController.deleteById)
 
 module.exports = router;

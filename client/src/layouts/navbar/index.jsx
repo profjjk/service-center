@@ -9,7 +9,7 @@ export const Navbar = () => {
     const links = [
         { path: '/dashboard', text: 'Dashboard' },
         { path: '/customers', text: 'Customers' },
-        { path: '/services', text: 'Service Jobs' },
+        { path: '/services', text: 'Service jobs' },
         { path: '/inventory', text: 'Inventory' }
     ];
 

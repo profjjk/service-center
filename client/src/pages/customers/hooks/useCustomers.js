@@ -1,12 +1,11 @@
-import { API } from '../../utils';
+import { API } from '../../../utils';
 import { useQuery, useQueryClient } from 'react-query';
-import { getStoredUser } from '../../utils/storage';
+import { getStoredUser } from '../../../utils';
 
 const getCustomers = async (companyId) => {
     try {
         if (companyId) {
             const { data } = await API.getCustomers(companyId);
-            // return data ? data : [];
             return data;
         }
     } catch(err) { console.error(err) }
@@ -19,7 +18,8 @@ export const useCustomers = () => {
         'customers',
         () => getCustomers(getStoredUser()?.company),
         {
-            enabled: !!getStoredUser()
+            enabled: !!getStoredUser(),
+            initialData: [],
         }
     )
 }

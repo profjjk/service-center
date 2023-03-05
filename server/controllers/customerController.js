@@ -1,7 +1,14 @@
 const db = require('../models');
 
 module.exports = {
-    findAllByCompany: async (req, res) => {
+    create: async (req, res) => {
+        try {
+            const data = await db.Customer.create(req.body);
+            res.json(data);
+        } catch(err) { res.status(422).json({ msg: err}) }
+    },
+
+    findAllByCompanyId: async (req, res) => {
         try {
             const data = await db.Customer.find({ company: req.params.id }).sort({ updatedAt: -1 });
             res.json(data);
@@ -22,14 +29,7 @@ module.exports = {
         } catch(err) { res.status(422).json({ msg: err}) }
     },
 
-    create: async (req, res) => {
-        try {
-            const data = await db.Customer.create(req.body);
-            res.json(data);
-        } catch(err) { res.status(422).json({ msg: err}) }
-    },
-
-    delete: async (req, res) => {
+    deleteById: async (req, res) => {
         try {
             await db.Customer.deleteOne({ _id: req.params.id });
             res.end();
