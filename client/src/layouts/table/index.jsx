@@ -1,22 +1,31 @@
+import { useLocation } from 'react-router';
+import { sortPendingToTop } from '../../utils';
 import dayjs from 'dayjs';
 import './style.scss';
 
-export const Table = ({ headers, rows, type }) => {
+export const Table = ({ headers, rows, setFilter }) => {
+    rows = sortPendingToTop(rows);
+    const { pathname } = useLocation();
+
     return (
         <table>
             <thead>
-                <tr className={`th-${type}`}>
+                <tr className={`tr-${pathname.slice(1)}`}>
                     {headers.map((header) => (
                         <th key={header}>{header}</th>
                     ))}
                 </tr>
             </thead>
 
-            <tbody className={type}>
+            <tbody>
                 {rows.map((r) => (
-                    <tr className={`tr-${type} clickable`} key={r._id}>
-                        {type === 'customer' && <CustomerDataRow customer={r} />}
-                        {type === 'job' && <JobDataRow job={r} />}
+                    <tr
+                        className={`tr-${pathname.slice(1)} clickable ${r?.status === 'Pending' ? 'pending' : ''}`}
+                        key={r._id}
+                        onClick={() => setFilter(r)}
+                    >
+                            {pathname === '/customers' && <CustomerDataRow customer={r} />}
+                            {pathname === '/jobs' && <JobDataRow job={r} />}
                     </tr>
                 ))}
             </tbody>

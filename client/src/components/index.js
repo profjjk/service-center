@@ -4,4 +4,4 @@ export {
 } from './Forms';
 export { useAuth, Login } from './auth';
 export { useUser } from './user';
-export { withSearch } from './hocs/withSearch';
+export { withFilter } from './hocs/withFilter';

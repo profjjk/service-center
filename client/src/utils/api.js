@@ -9,6 +9,11 @@ const getAuthHeader = () => {
 }
 
 export const API = {
+    // JOBS
+    getJobs(companyId) {
+        return api.get(`/jobs/${companyId}`, { headers: getAuthHeader() })
+    },
+
     // CUSTOMERS
     getCustomers(companyId) {
         return api.get(`/customers/${companyId}`, { headers: getAuthHeader() });

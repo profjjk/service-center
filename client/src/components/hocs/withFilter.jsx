@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-export const withSearch = (Component) => (props) => {
-    const [search, setSearch] = useState('');
+export const withFilter = (Component) => (props) => {
+    const [filter, setFilter] = useState('');
 
     return (
         <Component
             {...props}
-            search={search}
-            setSearch={setSearch}
+            filter={filter}
+            setFilter={setFilter}
         />
     )
 }
