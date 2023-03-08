@@ -9,7 +9,7 @@ router.route('/:id')
     .put(jobController.updateById)
     .delete(jobController.deleteById);
 
-router.route('/clear/:id')
+router.route('/many/:id')
     .delete(jobController.deleteMany);
 
 

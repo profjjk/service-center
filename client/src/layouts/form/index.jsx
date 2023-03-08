@@ -1,18 +1,28 @@
+import { useLocation } from 'react-router';
 import { AutoComplete } from '../../features';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faDollarSign, faHashtag } from '@fortawesome/free-solid-svg-icons';
-import dayjs from 'dayjs';
 import './style.scss';
 
-export const Form = ({ submit, setFilter, handleDelete, job, customer }) => {
+export const Form = ({ submitHandler, deleteHandler, setShowForm, job, customer }) => {
+    const { pathname } = useLocation();
+
     return (
-        <form id={job ? 'job-form' : 'customer-form'} onSubmit={submit}>
-            {job && <JobData job={job} />}
+        <form
+            id={(job || pathname === '/jobs') ? 'job-form' : 'customer-form'}
+            data-customer={customer && customer?._id}
+            data-job={job && job?._id}
+            onSubmit={submitHandler}
+        >
+            {(job || pathname === '/jobs') && <JobData job={job} />}
+
             <CustomerData customer={customer} />
-            {job ? <JobNotes job={job} /> : <CustomerNotes customer={customer} />}
+
+            {(job || pathname === '/jobs')  ? <JobNotes job={job} /> : <CustomerNotes customer={customer} />}
+
             <ButtonArea
-                handleDelete={handleDelete}
-                setFilter={setFilter}
+                setShowForm={setShowForm}
+                deleteHandler={deleteHandler}
                 job={job}
                 customer={customer}
             />
@@ -26,7 +36,7 @@ const JobData = ({ job }) => {
             <label>
                 Service Date
                 <input type={'date'} name={'serviceDate'}
-                       defaultValue={job ? dayjs(job.serviceDate).format('YYYY-MM-DD') : ''}/>
+                       defaultValue={job ? job.serviceDate : ''}/>
             </label>
 
             <label>
@@ -140,20 +150,26 @@ const CustomerNotes = ({ customer }) => {
     )
 }
 
-const ButtonArea = ({ setFilter, job, customer, handleDelete }) => {
+const ButtonArea = ({ deleteHandler, setShowForm, job, customer }) => {
     return (
         <div className={'button-area'}>
             <button className={'btn-form'} type={'submit'}>
                 Save
             </button>
 
-            <button className={'btn-form'} onClick={() => setFilter('')}>
+            <button className={'btn-form'} onClick={() => setShowForm(false)}>
                 Cancel
             </button>
 
-            {(job || customer) && (<button className={'btn-form delete'} onClick={handleDelete}>
-                Delete
-            </button>)}
+            {(job || customer) &&
+                (<button
+                    className={'btn-form delete'}
+                    data-id={job ? job._id : customer._id}
+                    onClick={deleteHandler}
+                >
+                    Delete
+                </button>)
+            }
         </div>
     )
 }

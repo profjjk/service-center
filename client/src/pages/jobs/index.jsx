@@ -1,64 +1,108 @@
-import { useNavigate } from 'react-router-dom';
-import { useUser, withFilter } from '../../components';
+import { useState } from 'react';
+import { useUser, withMutation } from '../../components';
 import { useJobs } from './hooks/useJobs';
 import { Searchbar, Dropdown } from '../../features';
 import { Table, Form } from '../../layouts';
+import { formatJob, formatCustomer } from '../../utils';
 import './style.scss';
 
-const Jobs = ({ filter, setFilter }) => {
+const Jobs = ({ mutateJob, mutateCustomer }) => {
+    const [showForm, setShowForm] = useState(false);
+    const [search, setSearch] = useState('');
+    const [selected, setSelected] = useState({ job: null, customer: null });
+    const [submitType, setSubmitType] = useState('');
     const { user } = useUser();
     const { jobs } = useJobs();
-    const navigate = useNavigate();
-
-    // CHECK AUTHORIZATION
-    if (!user) navigate('/auth');
 
     // APPLY FILTER TO DATA RESULTS
     const applyFilter = (jobs) => {
         return jobs.filter((j) => (
-            j?.customer?.businessName.toLowerCase().includes(filter.toLowerCase()) ||
-            j?.customer?.address?.city.toLowerCase().includes(filter.toLowerCase()) ||
-            (j?.serviceDate !== null && j?.serviceDate.includes(filter)) ||
-            (j?.invoiceNumber !== null && j?.invoiceNumber.includes(filter)) ||
-            j?.status.includes(filter)
+            j?.customer?.businessName.toLowerCase().includes(search.toLowerCase()) ||
+            j?.customer?.address?.city.toLowerCase().includes(search.toLowerCase()) ||
+            (j?.serviceDate !== null && j?.serviceDate.includes(search)) ||
+            (j?.invoiceNumber !== null && j?.invoiceNumber.includes(search)) ||
+            j?.status.includes(search)
         ))
     }
 
     // EVENT HANDLERS
-    const handleSubmit = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
         const formData = Object.fromEntries(new FormData(e.target));
-        console.log(formData);
+        const jobId = e.target.dataset.job;
+        const customerId = e.target.dataset.customer;
+        const job = formatJob(formData);
+        const customer = formatCustomer(formData);
+
+        if (submitType === 'add') {
+            await mutateCustomer.edit.mutate({ id: customerId, data: customer });
+            job.customer = customerId;
+            await mutateJob.add.mutate(job);
+        }
+        if (submitType === 'edit') {
+            await mutateCustomer.edit.mutate({ id: customerId, data: customer });
+            job.customer = customerId;
+            await mutateJob.edit.mutate({ id: jobId, data: job });
+        }
+        if (submitType === 'new') {
+            customer.company = user.company;
+            const newCustomer = await mutateCustomer.add.mutate(customer);
+            job.company = user.company;
+            job.customer = newCustomer._id;
+            await mutateJob.add.mutate(job);
+        }
+
+        setSelected({ job: null, customer: null });
+        setShowForm(false);
+    }
+
+    const deleteHandler = async (e) => {
+        e.preventDefault();
+        const jobId = e.target.dataset.id;
+        await mutateJob.remove.mutate(jobId);
+        setSelected({ job: null, customer: null });
+        setShowForm(false);
     }
 
     return (
         <main>
-            <h1>Service Jobs Page</h1>
-            {(typeof filter !== 'object' && jobs) ?
+            <div className={'action-btns'}>
+                <button onClick={(e) => {
+                    e.preventDefault();
+                    setSubmitType('new');
+                    setShowForm(true);
+                }}>
+                    Create New
+                </button>
+            </div>
+
+            {(!showForm) ?
                 (
                     <section>
                         <div className={'search-div'}>
                             <Searchbar
-                                setFilter={setFilter}
+                                setSearch={setSearch}
                                 placeholder={'Search by name, city, date, or invoice'}
                             />
-                            <Dropdown setFilter={setFilter} />
+                            <Dropdown setSearch={setSearch} />
                         </div>
                         <Table
-                            setFilter={setFilter}
+                            setSelected={setSelected}
+                            setShowForm={setShowForm}
+                            setSubmitType={setSubmitType}
                             headers={['Service Date', 'Business Name', 'City', 'Invoice #', 'Status']}
                             rows={applyFilter(jobs)}
-                            type={'job'}
                         />
                         {jobs.length < 1 && <p className={'empty-list'}>** No jobs to display **</p>}
                     </section>
                 ) : (
                     <section>
                         <Form
-                            submit={handleSubmit}
-                            job={filter}
-                            customer={filter.customer}
-                            setFilter={setFilter}
+                            submitHandler={submitHandler}
+                            deleteHandler={deleteHandler}
+                            setShowForm={setShowForm}
+                            job={selected?.job}
+                            customer={selected?.customer}
                         />
                     </section>
                 )
@@ -67,4 +111,4 @@ const Jobs = ({ filter, setFilter }) => {
     )
 }
 
-export default withFilter(Jobs);
+export default withMutation(Jobs);

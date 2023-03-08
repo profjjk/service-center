@@ -23,34 +23,5 @@ export const useJobs = () => {
         }
     )
 
-    const formatData = (formData, customerId) => {
-        const formattedJob = {
-            company: companyId,
-            customer: customerId,
-            serviceDate: formData.serviceDate.trim(),
-            invoiceNumber: formData.invoiceNumber.trim(),
-            issueNotes: formData.issueNotes,
-            serviceNotes: formData.serviceNotes,
-            status: formData.status,
-            totalBill: parseFloat(formData.totalBill),
-            isPaid: formData.isPaid === 'on'
-        }
-
-        const formattedCustomer = {
-            company: companyId,
-            businessName: formData.businessName,
-            contactName: formData.contactName,
-            phone: formData.phone,
-            address: {
-                street1: formData.street1,
-                street2: formData.street2,
-                city: formData.city,
-                state: formData.state,
-                zipcode: formData.zipcode
-            }
-        }
-        return { formattedJob, formattedCustomer }
-    }
-
-    return { jobs, formatData };
+    return { jobs };
 }

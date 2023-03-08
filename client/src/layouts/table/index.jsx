@@ -3,7 +3,7 @@ import { sortPendingToTop } from '../../utils';
 import dayjs from 'dayjs';
 import './style.scss';
 
-export const Table = ({ headers, rows, setFilter }) => {
+export const Table = ({ setSelected, setShowForm, setSubmitType, headers, rows }) => {
     rows = sortPendingToTop(rows);
     const { pathname } = useLocation();
 
@@ -22,7 +22,11 @@ export const Table = ({ headers, rows, setFilter }) => {
                     <tr
                         className={`tr-${pathname.slice(1)} clickable ${r?.status === 'Pending' ? 'pending' : ''}`}
                         key={r._id}
-                        onClick={() => setFilter(r)}
+                        onClick={() => {
+                            setSelected({ job: r, customer: r.customer, part: null});
+                            setSubmitType('edit');
+                            setShowForm(true);
+                        }}
                     >
                             {pathname === '/customers' && <CustomerDataRow customer={r} />}
                             {pathname === '/jobs' && <JobDataRow job={r} />}

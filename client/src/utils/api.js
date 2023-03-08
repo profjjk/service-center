@@ -22,6 +22,9 @@ export const API = {
     deleteJob(jobId) {
         return api.delete(`/jobs/${jobId}`, { headers: getAuthHeader() })
     },
+    deleteJobsByCustomer(customerId) {
+        return api.delete(`jobs/many/${customerId}`, { headers: getAuthHeader() })
+    },
 
     // CUSTOMERS
     createCustomer(newCustomer) {
@@ -35,6 +38,20 @@ export const API = {
     },
     deleteCustomer(customerId) {
         return api.delete(`/customers/${customerId}`, { headers: getAuthHeader() });
+    },
+
+    // PARTS
+    createPart(newPart) {
+        return api.post('/parts', newPart, { headers: getAuthHeader() });
+    },
+    getParts(companyId) {
+        return api.get(`/parts/${companyId}`, { headers: getAuthHeader() });
+    },
+    updatePart(partId, data) {
+        return api.put(`/parts/${partId}`, data, { headers: getAuthHeader() });
+    },
+    deletePart(partId) {
+        return api.delete(`/parts/${partId}`, { headers: getAuthHeader() });
     },
 
     // USERS

@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import './style.scss';
 
-export const Dropdown = ({ setFilter }) => {
-
+export const Dropdown = ({ setSearch }) => {
     const applyFilter = (e) => {
         const filter = e.target.value;
         if (filter !== 'Filter by status') {
-            setFilter(filter);
+            setSearch(filter);
         } else {
-            setFilter('');
+            setSearch('');
         }
     }
 

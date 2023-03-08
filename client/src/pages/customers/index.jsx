@@ -1,58 +1,62 @@
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useCustomers } from './hooks/useCustomers';
-import { useUser, withFilter } from '../../components';
+import { useUser, withMutation } from '../../components';
 import { Form, Table } from '../../layouts';
 import { Searchbar } from '../../features';
 import './style.scss';
 
-const Customers = ({ filter, setFilter }) => {
+const Customers = ({ mutateCustomer }) => {
+    const [showForm, setShowForm] = useState(false);
+    const [search, setSearch] = useState('');
+    const [selected, setSelected] = useState({ job: null, customer: null });
     const { user } = useUser();
     const { data: customers } = useCustomers();
-    const navigate = useNavigate();
-
-    // CHECK AUTHORIZATION
-    if (!user) navigate('/auth');
 
     // APPLY FILTER TO DATA RESULTS
     const applyFilter = (customers) => {
         return customers.filter((c) => (
-            c?.businessName.toLowerCase().includes(filter.toLowerCase()) ||
-            c?.address?.city.toLowerCase().includes(filter.toLowerCase()) ||
-            c?.phone.includes(filter)
+            c?.businessName.toLowerCase().includes(search.toLowerCase()) ||
+            c?.address?.city.toLowerCase().includes(search.toLowerCase()) ||
+            c?.phone.includes(search)
         ))
     }
 
     // EVENT HANDLERS
-    const handleSubmit = (e) => {
+    const submitHandler = (e) => {
         e.preventDefault();
         const formData = Object.fromEntries(new FormData(e.target));
         console.log(formData);
     }
 
+    const deleteHandler = async (e) => {
+
+    }
+
     return (
         <main>
             <h1>Customers Page</h1>
-            {(typeof filter !== 'object' && customers) ?
+            {(!showForm) ?
                 (
                     <section className={'table'}>
                         <Searchbar
-                            setFilter={setFilter}
+                            setSearch={setSearch}
                             placeholder={'Search business name, city, or phone #'}
                         />
                         <Table
-                            setFilter={setFilter}
+                            setSelected={setSelected}
+                            setShowForm={setShowForm}
                             headers={['Business Name', 'Address', 'Contact', 'Phone #']}
                             rows={applyFilter(customers)}
-                            type={'customer'}
                         />
                         {customers.length < 1 && <p className={'empty-list'}>** No customers to display **</p>}
                     </section>
                 ) : (
                     <section>
                         <Form
-                            submit={handleSubmit}
-                            customer={filter}
-                            setFilter={setFilter}
+                            submitHandler={submitHandler}
+                            deleteHandler={deleteHandler}
+                            setSelected={setSelected}
+                            customer={selected.customer}
                         />
                     </section>
                 )
@@ -61,4 +65,4 @@ const Customers = ({ filter, setFilter }) => {
     )
 }
 
-export default withFilter(Customers);
+export default withMutation(Customers);
