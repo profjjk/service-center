@@ -10,7 +10,9 @@ module.exports = {
 
     findAllByCompanyId: async (req, res) => {
         try {
-            const data = await db.Job.find({ company: req.params.id }).sort({ serviceDate: -1 }).populate('customer');
+            const data = await db.Job.find({ company: req.params.id })
+                .sort({ serviceDate: -1, invoiceNumber: -1 })
+                .populate('customer');
             res.json(data);
         } catch(err) { res.status(422).json({ msg: err}) }
     },
@@ -38,7 +40,7 @@ module.exports = {
 
     deleteMany: async (req, res) => {
         try {
-            await db.Job.deleteMany({ 'customer._id': req.params.id });
+            await db.Job.deleteMany({ customer: req.params.id });
             res.end();
         } catch(err) { res.status(422).json({ msg: err}) }
     }

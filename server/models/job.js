@@ -3,7 +3,7 @@ const { Schema, Types, model } = require('mongoose');
 const jobSchema = new Schema({
     company: { type: Types.ObjectId, ref: 'Company', required: true },
     customer: { type: Types.ObjectId, ref: 'Customer', required: true },
-    serviceDate: { type: Date },
+    serviceDate: String,
     invoiceNumber: { type: String, index: true },
     issueNotes: String,
     serviceNotes: String,

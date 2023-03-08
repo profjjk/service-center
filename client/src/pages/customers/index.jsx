@@ -1,22 +1,19 @@
-import { useCustomers } from './hooks/useCustomers';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useUser, withSearch, CustomerForm } from '../../components';
-import { Table } from '../../layouts';
+import { useCustomers } from './hooks/useCustomers';
+import { useUser, withMutation } from '../../components';
+import { Form, Table } from '../../layouts';
 import { Searchbar } from '../../features';
 import './style.scss';
 
-const Customers = ({ search, setSearch }) => {
-    const [selectedCustomer, setSelectedCustomer] = useState(null);
+const Customers = ({ mutateCustomer }) => {
+    const [showForm, setShowForm] = useState(false);
+    const [search, setSearch] = useState('');
+    const [selected, setSelected] = useState({ job: null, customer: null });
     const { user } = useUser();
     const { data: customers } = useCustomers();
-    const navigate = useNavigate();
 
-    if (!user) navigate('/auth');
-
-    const tableHeaders = ['Business Name', 'Address', 'Contact', 'Phone #'];
-
-    const applySearchFilter = (customers) => {
+    // APPLY FILTER TO DATA RESULTS
+    const applyFilter = (customers) => {
         return customers.filter((c) => (
             c?.businessName.toLowerCase().includes(search.toLowerCase()) ||
             c?.address?.city.toLowerCase().includes(search.toLowerCase()) ||
@@ -24,30 +21,48 @@ const Customers = ({ search, setSearch }) => {
         ))
     }
 
+    // EVENT HANDLERS
+    const submitHandler = (e) => {
+        e.preventDefault();
+        const formData = Object.fromEntries(new FormData(e.target));
+        console.log(formData);
+    }
+
+    const deleteHandler = async (e) => {
+
+    }
+
     return (
         <main>
             <h1>Customers Page</h1>
-            {!selectedCustomer && customers &&
-                <section>
-                    <Searchbar
-                        placeholder={'Search business name, city, or phone #'}
-                        setSearch={setSearch}
-                    />
-                    <Table
-                        headers={tableHeaders}
-                        rows={applySearchFilter(customers)}
-                        type={'customer'}
-                    />
-                </section>
+            {(!showForm) ?
+                (
+                    <section className={'table'}>
+                        <Searchbar
+                            setSearch={setSearch}
+                            placeholder={'Search business name, city, or phone #'}
+                        />
+                        <Table
+                            setSelected={setSelected}
+                            setShowForm={setShowForm}
+                            headers={['Business Name', 'Address', 'Contact', 'Phone #']}
+                            rows={applyFilter(customers)}
+                        />
+                        {customers.length < 1 && <p className={'empty-list'}>** No customers to display **</p>}
+                    </section>
+                ) : (
+                    <section>
+                        <Form
+                            submitHandler={submitHandler}
+                            deleteHandler={deleteHandler}
+                            setSelected={setSelected}
+                            customer={selected.customer}
+                        />
+                    </section>
+                )
             }
-
-            {selectedCustomer && <CustomerForm
-                customer={selectedCustomer}
-                setSelectedCustomer={setSelectedCustomer}
-            />}
         </main>
-
     )
 }
 
-export default withSearch(Customers);
+export default withMutation(Customers);

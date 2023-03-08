@@ -9,13 +9,13 @@ export const Searchbar = ({ placeholder, setSearch }) => {
     }
 
     return (
-        <div className={"searchbar"}>
-            <FontAwesomeIcon className={"faSearch"} icon={faSearch} />
+        <div className={'searchbar'}>
+            <FontAwesomeIcon className={'faSearch'} icon={faSearch} />
             <input
-                className={"search"}
-                name={"search"}
+                className={'search'}
+                name={'search'}
                 onChange={searchJobs}
-                type={"search"}
+                type={'search'}
                 placeholder={placeholder}
             />
         </div>

@@ -1,0 +1,24 @@
+$blue: #185adb;
+
+.search-div {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.action-btns {
+  display: flex;
+  justify-content: right;
+  gap: 1rem;
+
+  button {
+    padding: 0.5rem 0.8rem;
+    background-color: $blue;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,19 +1,23 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home, Dashboard, Customers, Services, Inventory, Authorization } from '../pages';
+import { Home, Dashboard, Customers, Jobs, Inventory, Authorization } from '../pages';
 import { Navbar } from '../layouts';
+import { useUser } from '../components';
 import './style/main.scss';
 
 const App = () => {
+    const { user } = useUser();
     return (
         <>
             <Navbar />
             <Routes>
                 <Route path={'/'} element={<Home/>} />
                 <Route path={'/auth'} element={<Authorization/>} />
-                <Route path={'/dashboard'} element={<Dashboard/>} />
-                <Route path={'/customers'} element={<Customers/>} />
-                <Route path={'/services'} element={<Services/>} />
-                <Route path={'/inventory'} element={<Inventory/>} />
+                {user && <>
+                    <Route path={'/dashboard'} element={<Dashboard/>} />
+                    <Route path={'/customers'} element={<Customers/>} />
+                    <Route path={'/jobs'} element={<Jobs/>} />
+                    <Route path={'/inventory'} element={<Inventory/>} />
+                </>}
             </Routes>
         </>
     );
