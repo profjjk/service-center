@@ -10,16 +10,25 @@ const getAuthHeader = () => {
 
 export const API = {
     // JOBS
+    createJob(newJob) {
+        return api.post('/jobs', newJob, { headers: getAuthHeader() })
+    },
     getJobs(companyId) {
         return api.get(`/jobs/${companyId}`, { headers: getAuthHeader() })
     },
+    updateJob(jobId, data) {
+        return api.put(`/jobs/${jobId}`, data, { headers: getAuthHeader() })
+    },
+    deleteJob(jobId) {
+        return api.delete(`/jobs/${jobId}`, { headers: getAuthHeader() })
+    },
 
     // CUSTOMERS
-    getCustomers(companyId) {
-        return api.get(`/customers/${companyId}`, { headers: getAuthHeader() });
-    },
     createCustomer(newCustomer) {
         return api.post('/customers', newCustomer, { headers: getAuthHeader() });
+    },
+    getCustomers(companyId) {
+        return api.get(`/customers/${companyId}`, { headers: getAuthHeader() });
     },
     updateCustomer(customerId, data) {
         return api.put(`/customers/${customerId}`, data, { headers: getAuthHeader() });
@@ -29,11 +38,11 @@ export const API = {
     },
 
     // USERS
-    getUser(userId) {
-        return api.get(`/users/${userId}`, { headers: getAuthHeader() });
-    },
     createUser(newUser) {
         return api.post('/users', newUser, { headers: getAuthHeader() });
+    },
+    getUser(userId) {
+        return api.get(`/users/${userId}`, { headers: getAuthHeader() });
     },
     updateUser(userId, data) {
         return api.put(`/users/${userId}`, data, { headers: getAuthHeader() });
@@ -43,10 +52,10 @@ export const API = {
     },
 
     // AUTHENTICATION
-    login(credentials) {
-        return api.post(`/auth/login`, credentials);
-    },
     register(data) {
         return api.post(`/auth/register`, data);
+    },
+    login(credentials) {
+        return api.post(`/auth/login`, credentials);
     }
 }

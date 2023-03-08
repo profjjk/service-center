@@ -48,6 +48,31 @@ a {
   }
 }
 
+.dropdown {
+  width: 100%;
+  max-width: 12rem;
+  position: relative;
+  .faChevronDown {
+    position: absolute;
+    right: 12px;
+    top: 14px;
+  }
+  select {
+    appearance: none;
+    cursor: pointer;
+    width: 100%;
+    padding-right: 1.8rem;
+  }
+}
+
+input, select {
+  padding: 0.6rem;
+  border: 0.5px solid lightgrey;
+  border-radius: 5px;
+  height: 2.5rem;
+  font-size: 1rem;
+}
+
 // TEXT
 .text-left {
   text-align: left;

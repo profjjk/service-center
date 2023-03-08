@@ -7,6 +7,7 @@ $yellow: #ffc947;
 
 nav {
   position: fixed;
+  z-index: 2;
   padding: 0 2rem;
   top: 0;
   left: 0;
@@ -16,9 +17,11 @@ nav {
   display: grid;
   grid-template-columns: 2fr 3fr 1fr;
   align-items: center;
+
   a {
     color: #fff;
   }
+
   ul {
     display: flex;
     justify-content: center;
@@ -26,15 +29,16 @@ nav {
     list-style: none;
     a {
       font-weight: bolder;
-      &.active {
+      &.active, &:hover {
         text-decoration: underline;
-      }
-      &:hover {
-        text-decoration: underline;
+        text-decoration-color: $yellow;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 2px;
         @include easeOut;
       }
     }
   }
+
   div:first-of-type {
     font-size: 1.4rem;
     a {
@@ -42,6 +46,7 @@ nav {
       color: $yellow;
     }
   }
+
   div:last-of-type {
     margin-left: auto;
   }
