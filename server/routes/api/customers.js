@@ -9,4 +9,7 @@ router.route('/:id')
     .put(customerController.updateById)
     .delete(customerController.deleteById)
 
+router.route('/many/:id')
+    .delete(customerController.deleteMany)
+
 module.exports = router;

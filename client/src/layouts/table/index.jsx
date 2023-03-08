@@ -23,7 +23,7 @@ export const Table = ({ setSelected, setShowForm, setSubmitType, headers, rows }
                         className={`tr-${pathname.slice(1)} clickable ${r?.status === 'Pending' ? 'pending' : ''}`}
                         key={r._id}
                         onClick={() => {
-                            setSelected({ job: r, customer: r.customer, part: null});
+                            setSelected({ customer: r });
                             setSubmitType('edit');
                             setShowForm(true);
                         }}

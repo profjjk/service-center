@@ -3,12 +3,14 @@ import { useCustomers } from './hooks/useCustomers';
 import { useUser, withMutation } from '../../components';
 import { Form, Table } from '../../layouts';
 import { Searchbar } from '../../features';
+import { formatCustomer } from '../../utils';
 import './style.scss';
 
-const Customers = ({ mutateCustomer }) => {
+const Customers = ({ mutateCustomer, mutateJob }) => {
     const [showForm, setShowForm] = useState(false);
     const [search, setSearch] = useState('');
-    const [selected, setSelected] = useState({ job: null, customer: null });
+    const [selected, setSelected] = useState({ customer: null });
+    const [submitType, setSubmitType] = useState('new');
     const { user } = useUser();
     const { data: customers } = useCustomers();
 
@@ -22,19 +24,50 @@ const Customers = ({ mutateCustomer }) => {
     }
 
     // EVENT HANDLERS
-    const submitHandler = (e) => {
+    const submitHandler = async (e, formData) => {
         e.preventDefault();
-        const formData = Object.fromEntries(new FormData(e.target));
-        console.log(formData);
+        const customerId = e.target.dataset.customer;
+        const customer = formatCustomer(formData);
+
+        if (submitType === 'edit') {
+            await mutateCustomer.edit.mutate({ id: customerId, data: customer });
+        }
+        if (submitType === 'new') {
+            customer.company = user.company;
+            await mutateCustomer.add.mutate(customer);
+        }
+
+        setSelected({ customer: null });
+        setShowForm(false);
     }
 
     const deleteHandler = async (e) => {
-
+        e.preventDefault();
+        const customerId = e.target.dataset.id;
+        const confirmation = window.confirm(
+            "Are you sure you want to delete?" +
+            "\nThis cannot be undone."
+        );
+        if (confirmation) {
+            await mutateJob.clear.mutate(customerId);
+            await mutateCustomer.remove.mutate(customerId);
+            setSelected({ customer: null });
+            setShowForm(false);
+        }
     }
 
     return (
         <main>
-            <h1>Customers Page</h1>
+            <div className={'action-btns'}>
+                <button onClick={(e) => {
+                    e.preventDefault();
+                    setSubmitType('new');
+                    setShowForm(true);
+                }}>
+                    Create New
+                </button>
+            </div>
+
             {(!showForm) ?
                 (
                     <section className={'table'}>
@@ -45,6 +78,7 @@ const Customers = ({ mutateCustomer }) => {
                         <Table
                             setSelected={setSelected}
                             setShowForm={setShowForm}
+                            setSubmitType={setSubmitType}
                             headers={['Business Name', 'Address', 'Contact', 'Phone #']}
                             rows={applyFilter(customers)}
                         />
@@ -55,7 +89,7 @@ const Customers = ({ mutateCustomer }) => {
                         <Form
                             submitHandler={submitHandler}
                             deleteHandler={deleteHandler}
-                            setSelected={setSelected}
+                            setShowForm={setShowForm}
                             customer={selected.customer}
                         />
                     </section>

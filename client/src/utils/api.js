@@ -39,6 +39,9 @@ export const API = {
     deleteCustomer(customerId) {
         return api.delete(`/customers/${customerId}`, { headers: getAuthHeader() });
     },
+    deleteCustomersByCompany(companyId) {
+        return api.delete(`/customers/many/${companyId}`, { headers: getAuthHeader() });
+    },
 
     // PARTS
     createPart(newPart) {

@@ -26,9 +26,8 @@ const Jobs = ({ mutateJob, mutateCustomer }) => {
     }
 
     // EVENT HANDLERS
-    const submitHandler = async (e) => {
+    const submitHandler = async (e, formData) => {
         e.preventDefault();
-        const formData = Object.fromEntries(new FormData(e.target));
         const jobId = e.target.dataset.job;
         const customerId = e.target.dataset.customer;
         const job = formatJob(formData);
@@ -59,9 +58,15 @@ const Jobs = ({ mutateJob, mutateCustomer }) => {
     const deleteHandler = async (e) => {
         e.preventDefault();
         const jobId = e.target.dataset.id;
-        await mutateJob.remove.mutate(jobId);
-        setSelected({ job: null, customer: null });
-        setShowForm(false);
+        const confirmation = window.confirm(
+            "Are you sure you want to delete?" +
+            "\nThis cannot be undone."
+        );
+        if (confirmation) {
+            await mutateJob.remove.mutate(jobId);
+            setSelected({ job: null, customer: null });
+            setShowForm(false);
+        }
     }
 
     return (
@@ -101,6 +106,7 @@ const Jobs = ({ mutateJob, mutateCustomer }) => {
                             submitHandler={submitHandler}
                             deleteHandler={deleteHandler}
                             setShowForm={setShowForm}
+                            setSelected={setSelected}
                             job={selected?.job}
                             customer={selected?.customer}
                         />
