@@ -4,6 +4,7 @@ import { API } from '../../utils';
 export const withMutation = (Component) => (props) => {
     const qc = useQueryClient();
 
+    // JOB MUTATIONS
     const addJob = useMutation((job) => API.createJob(job), {
         onSuccess: () => {
             qc.invalidateQueries('jobs');
@@ -19,6 +20,13 @@ export const withMutation = (Component) => (props) => {
             qc.invalidateQueries('jobs');
         }
     });
+    const clearJobs = useMutation((customerId) => API.deleteJobsByCustomer(customerId), {
+        onSuccess: () => {
+            qc.invalidateQueries('jobs');
+        }
+    });
+
+    // CUSTOMER MUTATIONS
     const addCustomer = useMutation((customer) => API.createCustomer(customer), {
         onSuccess: () => {
             qc.invalidateQueries('customers');
@@ -32,8 +40,15 @@ export const withMutation = (Component) => (props) => {
     const removeCustomer = useMutation((id) => API.deleteCustomer(id), {
         onSuccess: () => {
             qc.invalidateQueries('customers');
-        },
+        }
     });
+    const clearCustomers = useMutation((companyId) => API.deleteCustomersByCompany(companyId), {
+        onSuccess: () => {
+            qc.invalidateQueries('customers');
+        }
+    });
+
+    // PART MUTATIONS
     const addPart = useMutation(part => API.createPart(part), {
         onSuccess: () => {
             qc.invalidateQueries('parts');
@@ -53,9 +68,9 @@ export const withMutation = (Component) => (props) => {
     return (
         <Component
             {...props}
-            mutateJob={{create: addJob, edit: editJob, delete: removeJob }}
-            mutateCustomer={{ create: addCustomer, edit: editCustomer, delete: removeCustomer }}
-            mutatePart={{ create: addPart, edit: editPart, delete: removePart }}
+            mutateJob={{ add: addJob, edit: editJob, remove: removeJob, clear: clearJobs }}
+            mutateCustomer={{ add: addCustomer, edit: editCustomer, remove: removeCustomer, clear: clearCustomers }}
+            mutatePart={{ add: addPart, edit: editPart, remove: removePart }}
         />
     )
 }

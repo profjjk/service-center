@@ -4,19 +4,34 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faDollarSign, faHashtag } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
 
-export const Form = ({ submitHandler, deleteHandler, setShowForm, job, customer }) => {
+export const Form = ({ submitHandler, deleteHandler, setShowForm, setSelected, job, customer }) => {
     const { pathname } = useLocation();
+
+    const validateForm = (e) => {
+        const formData = Object.fromEntries(new FormData(e.target));
+        if (
+            formData.businessName === '' ||
+            formData.phone === '' ||
+            formData.street1 === '' ||
+            formData.city === ''
+        ) return;
+        submitHandler(e, formData);
+    }
 
     return (
         <form
             id={(job || pathname === '/jobs') ? 'job-form' : 'customer-form'}
             data-customer={customer && customer?._id}
             data-job={job && job?._id}
-            onSubmit={submitHandler}
+            onSubmit={validateForm}
         >
             {(job || pathname === '/jobs') && <JobData job={job} />}
 
-            <CustomerData customer={customer} />
+            <CustomerData
+                setSelected={setSelected}
+                pathname={pathname}
+                customer={customer}
+            />
 
             {(job || pathname === '/jobs')  ? <JobNotes job={job} /> : <CustomerNotes customer={customer} />}
 
@@ -82,22 +97,22 @@ const JobData = ({ job }) => {
     )
 }
 
-const CustomerData = ({ customer }) => {
+const CustomerData = ({ setSelected, customer, pathname }) => {
     return (
         <div className={'customer-area'}>
             <div>
                 <label>
                     Contact Information
-                    {!customer ? (
-                        <AutoComplete />
+                    {(!customer && pathname === '/jobs') ? (
+                        <AutoComplete setSelected={setSelected} />
                     ) : (
-                        <input type={'text'} name={'businessName'} placeholder={'Business Name'} required
+                        <input type={'text'} name={'businessName'} placeholder={'Business Name'}
                                defaultValue={customer ? customer.businessName : ''} />
                     )}
 
                     <input type={'text'} name={'contactName'} placeholder={'Contact Person'}
                            defaultValue={customer ? customer.contactName : ''} />
-                    <input type={'text'} name={'phone'} placeholder={'Phone #'} required
+                    <input type={'text'} name={'phone'} placeholder={'Phone #'}
                            defaultValue={customer ? customer.phone : ''} />
                 </label>
             </div>
@@ -105,16 +120,16 @@ const CustomerData = ({ customer }) => {
             <div>
                 <label className={'address'}>
                     Address
-                    <input type={'text'} name={'street1'} placeholder={'Street Address'} required
+                    <input type={'text'} name={'street1'} placeholder={'Street Address'} 
                            defaultValue={customer ? customer.address.street1 : ''} />
                     <input type={'text'} name={'street2'} placeholder={'Unit or Building #'}
                            defaultValue={customer ? customer.address.street2 : ''} />
 
                     <div>
-                        <input type={'text'} name={'city'} placeholder={'City'} required
+                        <input type={'text'} name={'city'} placeholder={'City'} 
                                defaultValue={customer ? customer.address.city : ''}/>
-                        <input className={'text-center'} type={'text'} name={'state'} defaultValue={'CA'} required/>
-                        <input type={'text'} name={'zipcode'} placeholder={'Zip Code'} required
+                        <input className={'text-center'} type={'text'} name={'state'} defaultValue={'CA'} />
+                        <input type={'text'} name={'zipcode'} placeholder={'Zip Code'} 
                                defaultValue={customer ? customer.address.zipcode : ''}/>
                     </div>
                 </label>
