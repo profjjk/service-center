@@ -1,13 +1,15 @@
-const router = require("express").Router();
-const partController = require("../../controllers/partController");
+const router = require('express').Router();
+const partController = require('../../controllers/partController');
 
 router.route("/")
-    .get(partController.findAllByCompanyId)
     .post(partController.create)
 
 router.route('/:id')
-    .get(partController.findById)
+    .get(partController.findAllByCompanyId)
     .put(partController.updateById)
     .delete(partController.deleteById)
+
+router.route('/many/:id')
+    .delete(partController.deleteMany);
 
 module.exports = router;

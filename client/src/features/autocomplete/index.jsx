@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useCustomers } from '../../pages/customers/hooks/useCustomers';
 import './style.scss';
 
-export const AutoComplete = ({ setSelected }) => {
+export const AutoComplete = ({ setSelected, setSubmitType }) => {
     const [activeSuggestion, setActiveSuggestion] = useState(0);
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [userInput, setUserInput] = useState('');
-    const { data: customers } = useCustomers();
+    const { customers } = useCustomers();
 
     const onChange = (e) => {
         const suggestions = customers;
@@ -29,6 +29,7 @@ export const AutoComplete = ({ setSelected }) => {
         setFilteredSuggestions([]);
         setShowSuggestions(false);
         setSelected({ customer });
+        setSubmitType('add');
     }
 
     return (
@@ -42,7 +43,7 @@ export const AutoComplete = ({ setSelected }) => {
                 value={userInput}
                 required
             />
-            {filteredSuggestions.length <= 1 && showSuggestions && userInput &&
+            {filteredSuggestions.length >= 1 && showSuggestions && userInput &&
                 <SuggestionList
                     selectCustomer={selectCustomer}
                     suggestions={filteredSuggestions}

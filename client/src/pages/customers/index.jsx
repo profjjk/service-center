@@ -12,7 +12,7 @@ const Customers = ({ mutateCustomer, mutateJob }) => {
     const [selected, setSelected] = useState({ customer: null });
     const [submitType, setSubmitType] = useState('new');
     const { user } = useUser();
-    const { data: customers } = useCustomers();
+    const { customers } = useCustomers();
 
     // APPLY FILTER TO DATA RESULTS
     const applyFilter = (customers) => {

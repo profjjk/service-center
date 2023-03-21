@@ -1,6 +1,5 @@
-import { API } from '../../../utils';
-import { useQuery, useQueryClient } from 'react-query';
-import { getStoredUser } from '../../../utils';
+import { useQuery } from 'react-query';
+import { API, getStoredUser } from '../../../utils';
 
 const getCustomers = async (companyId) => {
     try {
@@ -12,14 +11,16 @@ const getCustomers = async (companyId) => {
 }
 
 export const useCustomers = () => {
-    const qc = useQueryClient();
+    const companyId = getStoredUser()?.company;
 
-    return useQuery(
+    const { data: customers } = useQuery(
         'customers',
-        () => getCustomers(getStoredUser()?.company),
+        () => getCustomers(companyId),
         {
             enabled: !!getStoredUser(),
             initialData: [],
         }
     )
+
+    return { customers }
 }

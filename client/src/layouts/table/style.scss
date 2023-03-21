@@ -40,7 +40,7 @@ tbody {
   }
 }
 
-.tr-customers, .tr-jobs {
+.tr-customers, .tr-jobs, .tr-inventory {
   display: grid;
   th, td {
     text-align: center;
@@ -58,6 +58,15 @@ tbody {
 
 .tr-customers {
   grid-template-columns: 2fr 3fr 1fr 1fr;
+  th, td {
+    &:nth-of-type(1), &:nth-of-type(2) {
+      text-align: left;
+    }
+  }
+}
+
+.tr-inventory {
+  grid-template-columns: 1fr 5fr 1fr;
   th, td {
     &:nth-of-type(1), &:nth-of-type(2) {
       text-align: left;

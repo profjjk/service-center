@@ -34,5 +34,12 @@ module.exports = {
             await db.Part.deleteOne({ _id: req.params.id });
             res.end();
         } catch(err) { res.status(422).json({ msg: err}) }
+    },
+
+    deleteMany: async (req, res) => {
+        try {
+            await db.Part.deleteMany({ company: req.params.id });
+            res.end();
+        } catch(err) { res.status(422).json({ msg: err}) }
     }
 }

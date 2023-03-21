@@ -35,6 +35,7 @@ const Jobs = ({ mutateJob, mutateCustomer }) => {
 
         if (submitType === 'add') {
             await mutateCustomer.edit.mutate({ id: customerId, data: customer });
+            job.company = user.company;
             job.customer = customerId;
             await mutateJob.add.mutate(job);
         }
@@ -107,6 +108,7 @@ const Jobs = ({ mutateJob, mutateCustomer }) => {
                             deleteHandler={deleteHandler}
                             setShowForm={setShowForm}
                             setSelected={setSelected}
+                            setSubmitType={setSubmitType}
                             job={selected?.job}
                             customer={selected?.customer}
                         />

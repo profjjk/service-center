@@ -23,13 +23,18 @@ export const Table = ({ setSelected, setShowForm, setSubmitType, headers, rows }
                         className={`tr-${pathname.slice(1)} clickable ${r?.status === 'Pending' ? 'pending' : ''}`}
                         key={r._id}
                         onClick={() => {
-                            setSelected({ customer: r });
+                            setSelected({
+                                job: pathname === '/jobs' ? r : null,
+                                customer: pathname === '/customers' ? r : r?.customer,
+                                part: pathname === '/inventory' ? r : null,
+                            });
                             setSubmitType('edit');
                             setShowForm(true);
                         }}
                     >
-                            {pathname === '/customers' && <CustomerDataRow customer={r} />}
-                            {pathname === '/jobs' && <JobDataRow job={r} />}
+                        {pathname === '/customers' && <CustomerDataRow customer={r} />}
+                        {pathname === '/jobs' && <JobDataRow job={r} />}
+                        {pathname === '/inventory' && <PartDataRow part={r} />}
                     </tr>
                 ))}
             </tbody>
@@ -60,6 +65,17 @@ const JobDataRow = ({ job }) => {
             <td>{job?.customer?.address?.city}</td>
             <td>{job?.invoiceNumber ? job?.invoiceNumber : '--'}</td>
             <td>{job?.status}</td>
+        </>
+    )
+}
+
+const PartDataRow = ({ part }) => {
+    console.log(part)
+    return (
+        <>
+            <td>{part?.partNumber}</td>
+            <td>{part?.description}</td>
+            <td>{part?.stock}</td>
         </>
     )
 }
