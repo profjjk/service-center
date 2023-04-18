@@ -5,8 +5,8 @@ import dayjs from 'dayjs';
 
 export const Calendar = ({ jobs }) => {
     const qc = useQueryClient();
-    const [jobList, setJobList] = useState([]);
-    const [days, setDays] = useState([]);
+    const [ jobList, setJobList ] = useState([]);
+    const [ days, setDays ] = useState([]);
     const today = dayjs(new Date());
 
     useEffect(() => {
@@ -17,25 +17,25 @@ export const Calendar = ({ jobs }) => {
                 days.push({
                     name: dayjs(today).add(i, 'day').format('dddd'),
                     number: dayjs(today).add(i, 'day').format('DD')
-                })
+                });
             }
             return days;
-        })
-    }, [jobs])
+        });
+    }, [ jobs ]);
 
     // EVENT LISTENERS
     const selectJob = (job) => {
         qc.setQueryData('submissionType', 'edit');
         qc.setQueryData('selectedJob', job);
         qc.setQueryData('selectedCustomer', job.customer);
-    }
+    };
 
     return (
-        <section className={"section-calendar"}>
+        <section className={'section-calendar'}>
             <h2>5 DAY SCHEDULE</h2>
-            <div className={"calendar"}>
+            <div className={'calendar'}>
                 {days.map(day => (
-                    <div className={"calendar-day"} key={day.number}>
+                    <div className={'calendar-day'} key={day.number}>
                         <h3>
                             <span>{day.name}</span>
                             <span>{day.number}</span>
@@ -61,5 +61,5 @@ export const Calendar = ({ jobs }) => {
                 ))}
             </div>
         </section>
-    )
-}
+    );
+};

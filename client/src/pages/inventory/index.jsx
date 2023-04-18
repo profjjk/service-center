@@ -5,10 +5,10 @@ import { Searchbar } from '../../features';
 import { Form, Table } from '../../layouts';
 
 const Inventory = ({ mutatePart }) => {
-    const [showForm, setShowForm] = useState(false);
-    const [search, setSearch] = useState('');
-    const [selected, setSelected] = useState({ job: null, customer: null, part: null });
-    const [submitType, setSubmitType] = useState('new');
+    const [ showForm, setShowForm ] = useState(false);
+    const [ search, setSearch ] = useState('');
+    const [ selected, setSelected ] = useState({ job: null, customer: null, part: null });
+    const [ submitType, setSubmitType ] = useState('new');
     const { user } = useUser();
     const { parts } = useParts();
 
@@ -17,27 +17,27 @@ const Inventory = ({ mutatePart }) => {
         return parts.filter((p) => (
             p?.partNumber.toLowerCase().includes(search.toLowerCase()) ||
             p?.description.toLowerCase().includes(search.toLowerCase())
-        ))
-    }
+        ));
+    };
 
     // EVENT HANDLERS
     const submitHandler = async (e, formData) => {
         e.preventDefault();
 
-    }
+    };
 
     const deleteHandler = async (e) => {
         e.preventDefault();
 
-    }
+    };
 
     const increaseStock = async (e) => {
         e.preventDefault();
-    }
+    };
 
     const decreaseStock = async (e) => {
         e.preventDefault();
-    }
+    };
 
     return (
         <main>
@@ -64,7 +64,7 @@ const Inventory = ({ mutatePart }) => {
                             setSubmitType={setSubmitType}
                             decreaseStock={decreaseStock}
                             increaseStock={increaseStock}
-                            headers={['Part #', 'Description', 'In Stock']}
+                            headers={[ 'Part #', 'Description', 'In Stock' ]}
                             rows={applyFilter(parts)}
                         />
                         {parts.length < 1 && <p className={'empty-list'}>** No parts to display **</p>}
@@ -82,7 +82,7 @@ const Inventory = ({ mutatePart }) => {
                 )
             }
         </main>
-    )
-}
+    );
+};
 
 export default withMutation(Inventory);

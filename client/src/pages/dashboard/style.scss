@@ -2,44 +2,47 @@ $blue: #185adb;
 $dark: #0a1931;
 
 #top-section {
-  padding: 2rem 0;
   display: grid;
+  padding: 2rem 0;
   grid-template-columns: 2fr 1fr;
 }
 
 // NOTIFICATIONS SECTION
 .section-notifications {
-  margin-bottom: 4rem;
   min-height: 8rem;
+  margin-bottom: 4rem;
 }
+
 .notifications {
   display: flex;
   flex-flow: column;
   gap: 0.3rem;
 }
+
 .notice {
-  color: red;
-  font-weight: 600;
   font-size: 1.1rem;
-  text-decoration: none;
+  font-weight: 600;
   width: max-content;
+  text-decoration: none;
+  color: red;
 
   &:hover {
     cursor: pointer;
     color: $blue;
   }
 }
+
 .empty-notifications {
-  text-align: left;
   font-style: italic;
+  text-align: left;
   color: grey;
 }
 
 // REVENUE SECTION
 .section-revenue {
+  min-height: 8rem;
   margin: 0 auto 4rem auto;
   padding: 2rem;
-  min-height: 8rem;
   //width: max-content;
   border: 1px solid darkgray;
   border-radius: 20px;
@@ -51,72 +54,83 @@ $dark: #0a1931;
     color: $blue !important;
   }
 }
+
 .revenue {
   font-size: 2.8rem;
   margin-bottom: 5px;
 }
+
 .outstanding {
   font-size: 0.9rem;
-  color: darkgray;
   font-style: italic;
   width: max-content;
   text-decoration: none;
+  color: darkgray;
+
   &:hover {
+    font-weight: bolder;
     cursor: pointer;
     color: $blue;
-    font-weight: bolder;
   }
 }
 
 // CALENDAR SECTION
 .calendar {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
   justify-content: space-between;
+  grid-template-columns: repeat(5, 1fr);
   gap: 1%;
 }
+
 .calendar-day {
   position: relative;
+  min-height: 15rem;
   border: 1px solid $dark;
   border-radius: 5px;
-  min-height: 15rem;
   background: white;
+
   div {
-    padding-top: 30px;
     overflow-y: scroll;
     max-height: 14.3rem;
+    padding-top: 30px;
     -ms-overflow-style: none;
+
     &::-webkit-scrollbar {
       display: none;
     }
   }
+
   h3 {
-    padding: 5px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin-bottom: 5px;
-    background: $dark;
-    color: white;
     font-weight: 100;
+    position: absolute;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    color: white;
+    background: $dark;
   }
 }
+
 .calendar-job {
-  margin: 15px 10px;
-  font-weight: 600;
   font-size: 1.1rem;
+  font-weight: 600;
+  margin: 15px 10px;
+
   a {
     text-decoration: none;
     color: $dark;
+
     &:hover {
+      font-weight: 600;
       cursor: pointer;
       color: $blue;
-      font-weight: 600;
     }
+
     span {
       font-size: 0.9rem;
       color: $blue;

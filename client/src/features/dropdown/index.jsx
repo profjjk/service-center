@@ -10,7 +10,7 @@ export const Dropdown = ({ setSearch }) => {
         } else {
             setSearch('');
         }
-    }
+    };
 
     return (
         <div className={'dropdown'}>
@@ -23,5 +23,5 @@ export const Dropdown = ({ setSearch }) => {
                 <option>Canceled</option>
             </select>
         </div>
-    )
-}
+    );
+};

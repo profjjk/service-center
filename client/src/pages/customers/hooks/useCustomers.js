@@ -7,8 +7,10 @@ const getCustomers = async (companyId) => {
             const { data } = await API.getCustomers(companyId);
             return data;
         }
-    } catch(err) { console.error(err) }
-}
+    } catch (err) {
+        console.error(err);
+    }
+};
 
 export const useCustomers = () => {
     const companyId = getStoredUser()?.company;
@@ -18,9 +20,9 @@ export const useCustomers = () => {
         () => getCustomers(companyId),
         {
             enabled: !!getStoredUser(),
-            initialData: [],
+            initialData: []
         }
-    )
+    );
 
-    return { customers }
-}
+    return { customers };
+};

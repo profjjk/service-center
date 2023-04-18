@@ -7,8 +7,8 @@ const formatJob = (formData) => {
         status: formData.status,
         totalBill: parseFloat(formData.totalBill),
         isPaid: formData.isPaid === 'on'
-    }
-}
+    };
+};
 
 const formatCustomer = (formData) => {
     return {
@@ -22,10 +22,10 @@ const formatCustomer = (formData) => {
             state: formData.state,
             zipcode: formData.zipcode
         }
-    }
-}
+    };
+};
 
 export {
     formatJob,
     formatCustomer
-}
+};

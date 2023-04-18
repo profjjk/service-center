@@ -6,33 +6,37 @@ $dark: #0a1931;
 $red: #d3232b;
 
 .no-suggestions {
-  color: $blue;
   padding: 0.5rem;
+  color: $blue;
 }
+
 .suggestions {
   position: absolute;
-  transform: translateY(62px);
-  background: white;
-  border: 1px solid $blue;
-  border-radius: 5px;
-  border-top-width: 0;
-  list-style: none;
-  margin-top: 0;
-  max-height: 146px;
-  overflow-y: auto;
-  padding-left: 0;
   z-index: 2;
+  overflow-y: auto;
   max-width: 30rem;
+  max-height: 146px;
+  margin-top: 0;
+  padding-left: 0;
+  list-style: none;
+  transform: translateY(62px);
+  border: 1px solid $blue;
+  border-top-width: 0;
+  border-radius: 5px;
+  background: white;
 }
+
 .suggestions li {
   padding: 0.5rem;
 }
+
 .suggestion-active, .suggestions li:hover {
-  background: $blue;
-  color: $yellow;
-  cursor: pointer;
   font-weight: 600;
+  cursor: pointer;
+  color: $yellow;
+  background: $blue;
 }
+
 .suggestions li:not(:last-of-type) {
   border-bottom: 1px solid #999;
 }

@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import { useAuth, useUser } from '../../components'
+import { useAuth, useUser } from '../../components';
 import './style.scss';
 
 export const Navbar = () => {
@@ -22,7 +22,7 @@ export const Navbar = () => {
 
                 <ul>
                     {user &&
-                        links.map(({ path, text}) => (
+                        links.map(({ path, text }) => (
                             <li key={path} className={'nav-item'}>
                                 <NavLink to={path}>
                                     {text}
@@ -45,5 +45,5 @@ export const Navbar = () => {
                 </div>
             </nav>
         </header>
-    )
-}
+    );
+};

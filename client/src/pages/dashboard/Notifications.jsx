@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export const Notifications = ({ jobs, parts }) => {
     return (
-        <section className={"section-notifications"}>
+        <section className={'section-notifications'}>
             <h2>NOTIFICATIONS</h2>
             <div className={'notifications'}>
                 {
@@ -25,5 +25,5 @@ export const Notifications = ({ jobs, parts }) => {
                 }
             </div>
         </section>
-    )
-}
+    );
+};

@@ -1,9 +1,9 @@
 $blue: #185adb;
 
 .search-div {
-  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .action-btns {
@@ -13,10 +13,11 @@ $blue: #185adb;
 
   button {
     padding: 0.5rem 0.8rem;
-    background-color: $blue;
+    color: #fff;
     border: none;
     border-radius: 5px;
-    color: #fff;
+    background-color: $blue;
+
     &:hover {
       cursor: pointer;
     }

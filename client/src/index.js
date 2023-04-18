@@ -12,7 +12,7 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <QueryClientProvider client={queryClient}>
-                <App />
+                <App/>
                 <ReactQueryDevtools/>
             </QueryClientProvider>
         </BrowserRouter>

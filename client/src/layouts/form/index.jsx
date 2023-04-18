@@ -4,7 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faDollarSign, faHashtag } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
 
-export const Form = ({ submitHandler, deleteHandler, setShowForm, setSelected, setSubmitType, job, customer, part }) => {
+export const Form = ({
+                         submitHandler,
+                         deleteHandler,
+                         setShowForm,
+                         setSelected,
+                         setSubmitType,
+                         job,
+                         customer,
+                         part
+                     }) => {
     const { pathname } = useLocation();
 
     const validateForm = (e) => {
@@ -16,7 +25,7 @@ export const Form = ({ submitHandler, deleteHandler, setShowForm, setSelected, s
             formData.city === ''
         ) return;
         submitHandler(e, formData);
-    }
+    };
 
     return (
         <form
@@ -25,9 +34,9 @@ export const Form = ({ submitHandler, deleteHandler, setShowForm, setSelected, s
             data-job={job && job?._id}
             onSubmit={validateForm}
         >
-            {(part || pathname === '/inventory') && <PartData part={part} />}
+            {(part || pathname === '/inventory') && <PartData part={part}/>}
 
-            {(job || pathname === '/jobs') && <JobData job={job} />}
+            {(job || pathname === '/jobs') && <JobData job={job}/>}
 
             {(customer || pathname === '/customers') &&
                 <CustomerData
@@ -38,9 +47,9 @@ export const Form = ({ submitHandler, deleteHandler, setShowForm, setSelected, s
                 />
             }
 
-            {(job || pathname === '/jobs') && <JobNotes job={job} />}
+            {(job || pathname === '/jobs') && <JobNotes job={job}/>}
 
-            {(customer || pathname === '/customers') && <CustomerNotes customer={customer} />}
+            {(customer || pathname === '/customers') && <CustomerNotes customer={customer}/>}
 
             <ButtonArea
                 setShowForm={setShowForm}
@@ -52,8 +61,8 @@ export const Form = ({ submitHandler, deleteHandler, setShowForm, setSelected, s
                 part={part}
             />
         </form>
-    )
-}
+    );
+};
 
 const PartData = ({ decreaseStock, increaseStock, part }) => {
     return (
@@ -79,8 +88,8 @@ const PartData = ({ decreaseStock, increaseStock, part }) => {
                 />
             </label>
         </div>
-    )
-}
+    );
+};
 
 const JobData = ({ job }) => {
     return (
@@ -121,7 +130,7 @@ const JobData = ({ job }) => {
                 <div className={'dollarInput'}>
                     <FontAwesomeIcon className={'faDollarSign'} icon={faDollarSign}/>
                     <input type={'text'} name={'totalBill'}
-                           defaultValue={job && job?.totalBill }/>
+                           defaultValue={job && job?.totalBill}/>
                 </div>
             </label>
 
@@ -131,8 +140,8 @@ const JobData = ({ job }) => {
                        defaultChecked={job && job?.isPaid === true ? 'on' : undefined}/>
             </label>
         </div>
-    )
-}
+    );
+};
 
 const CustomerData = ({ setSelected, setSubmitType, customer, pathname }) => {
     return (
@@ -141,55 +150,55 @@ const CustomerData = ({ setSelected, setSubmitType, customer, pathname }) => {
                 <label>
                     Contact Information
                     {(!customer && pathname === '/jobs') ? (
-                        <AutoComplete setSelected={setSelected} setSubmitType={setSubmitType} />
+                        <AutoComplete setSelected={setSelected} setSubmitType={setSubmitType}/>
                     ) : (
                         <input type={'text'} name={'businessName'} placeholder={'Business Name'}
-                               defaultValue={customer ? customer?.businessName : ''} />
+                               defaultValue={customer ? customer?.businessName : ''}/>
                     )}
 
                     <input type={'text'} name={'contactName'} placeholder={'Contact Person'}
-                           defaultValue={customer ? customer?.contactName : ''} />
+                           defaultValue={customer ? customer?.contactName : ''}/>
                     <input type={'text'} name={'phone'} placeholder={'Phone #'}
-                           defaultValue={customer ? customer?.phone : ''} />
+                           defaultValue={customer ? customer?.phone : ''}/>
                 </label>
             </div>
 
             <div>
                 <label className={'address'}>
                     Address
-                    <input type={'text'} name={'street1'} placeholder={'Street Address'} 
-                           defaultValue={customer ? customer?.address?.street1 : ''} />
+                    <input type={'text'} name={'street1'} placeholder={'Street Address'}
+                           defaultValue={customer ? customer?.address?.street1 : ''}/>
                     <input type={'text'} name={'street2'} placeholder={'Unit or Building #'}
-                           defaultValue={customer ? customer?.address?.street2 : ''} />
+                           defaultValue={customer ? customer?.address?.street2 : ''}/>
 
                     <div>
-                        <input type={'text'} name={'city'} placeholder={'City'} 
+                        <input type={'text'} name={'city'} placeholder={'City'}
                                defaultValue={customer ? customer?.address?.city : ''}/>
-                        <input className={'text-center'} type={'text'} name={'state'} defaultValue={'CA'} />
-                        <input type={'text'} name={'zipcode'} placeholder={'Zip Code'} 
+                        <input className={'text-center'} type={'text'} name={'state'} defaultValue={'CA'}/>
+                        <input type={'text'} name={'zipcode'} placeholder={'Zip Code'}
                                defaultValue={customer ? customer?.address?.zipcode : ''}/>
                     </div>
                 </label>
             </div>
         </div>
-    )
-}
+    );
+};
 
 const JobNotes = ({ job }) => {
     return (
         <div className={'notes-area'}>
             <label>
                 Description of Problem
-                <textarea name={'issueNotes'} defaultValue={job ? job?.issueNotes : ''} />
+                <textarea name={'issueNotes'} defaultValue={job ? job?.issueNotes : ''}/>
             </label>
 
             <label>
                 Service Notes
-                <textarea name={'serviceNotes'} defaultValue={job ? job?.serviceNotes : ''} />
+                <textarea name={'serviceNotes'} defaultValue={job ? job?.serviceNotes : ''}/>
             </label>
         </div>
-    )
-}
+    );
+};
 
 const CustomerNotes = ({ customer }) => {
     return (
@@ -199,8 +208,8 @@ const CustomerNotes = ({ customer }) => {
                 <textarea name={'notes'} defaultValue={customer ? customer?.notes : ''}/>
             </label>
         </div>
-    )
-}
+    );
+};
 
 const ButtonArea = ({ deleteHandler, setShowForm, setSelected, pathname, job, customer, part }) => {
     return (
@@ -210,8 +219,8 @@ const ButtonArea = ({ deleteHandler, setShowForm, setSelected, pathname, job, cu
             </button>
 
             <button className={'btn-form'} onClick={() => {
-                setSelected({ job: null, customer: null, part: null })
-                setShowForm(false)
+                setSelected({ job: null, customer: null, part: null });
+                setShowForm(false);
             }}>
                 Cancel
             </button>
@@ -227,5 +236,5 @@ const ButtonArea = ({ deleteHandler, setShowForm, setSelected, pathname, job, cu
                 </button>)
             }
         </div>
-    )
-}
+    );
+};

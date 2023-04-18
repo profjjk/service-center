@@ -7,25 +7,28 @@ $red: #d3232b;
 
 .card-auth {
   display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
   align-items: center;
+  flex-direction: column;
+  width: 30rem;
   margin: auto;
   padding: 2rem;
-  width: 30rem;
-  background: white;
   border-radius: 10px;
+  background: white;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  gap: 2.5rem;
 }
 
 .card-header {
   text-align: center;
+
   h2 {
     font-size: 2.2rem;
     margin-bottom: 1rem;
   }
+
   span {
     color: $blue;
+
     &:hover {
       cursor: pointer;
       text-decoration: underline;
@@ -41,16 +44,16 @@ $red: #d3232b;
   gap: 1rem;
 
   label {
+    font-weight: bolder;
     display: flex;
     flex-flow: column;
     gap: 0.5rem;
-    font-weight: bolder;
   }
 
   input {
-    padding: 0.5rem 1rem;
     font-size: 1.2rem;
     width: 100%;
+    padding: 0.5rem 1rem;
   }
 
   button {
@@ -58,10 +61,11 @@ $red: #d3232b;
     width: max-content;
     margin: 1rem auto;
     padding: 1rem 2rem;
-    border: 0.5px solid lightgrey;
-    background-color: $blue;
     color: #fff;
+    border: 0.5px solid lightgrey;
     border-radius: 0.5rem;
+    background-color: $blue;
+
     &:hover {
       cursor: pointer;
       box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
@@ -73,20 +77,22 @@ $red: #d3232b;
     display: none;
     text-align: center;
     color: $red;
+
     &.error {
       display: block;
     }
   }
 
   .error {
+    color: $red;
     border-color: $red;
     outline: $red;
-    color: $red;
   }
 }
 
 .card-footer {
   color: $red;
+
   p:hover {
     cursor: pointer;
     text-decoration: underline;

@@ -3,10 +3,10 @@ import { useCustomers } from '../../pages/customers/hooks/useCustomers';
 import './style.scss';
 
 export const AutoComplete = ({ setSelected, setSubmitType }) => {
-    const [activeSuggestion, setActiveSuggestion] = useState(0);
-    const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-    const [showSuggestions, setShowSuggestions] = useState(false);
-    const [userInput, setUserInput] = useState('');
+    const [ activeSuggestion, setActiveSuggestion ] = useState(0);
+    const [ filteredSuggestions, setFilteredSuggestions ] = useState([]);
+    const [ showSuggestions, setShowSuggestions ] = useState(false);
+    const [ userInput, setUserInput ] = useState('');
     const { customers } = useCustomers();
 
     const onChange = (e) => {
@@ -20,7 +20,7 @@ export const AutoComplete = ({ setSelected, setSubmitType }) => {
         setFilteredSuggestions(filtered);
         setShowSuggestions(true);
         setUserInput(e.target.value);
-    }
+    };
 
     const selectCustomer = (e, customer) => {
         e.preventDefault();
@@ -30,13 +30,13 @@ export const AutoComplete = ({ setSelected, setSubmitType }) => {
         setShowSuggestions(false);
         setSelected({ customer });
         setSubmitType('add');
-    }
+    };
 
     return (
         <>
             <input
-                type='text'
-                placeholder='Business Name'
+                type="text"
+                placeholder="Business Name"
                 name={'businessName'}
                 onChange={onChange}
                 // onKeyDown={onKeyDown}
@@ -52,11 +52,11 @@ export const AutoComplete = ({ setSelected, setSubmitType }) => {
             }
         </>
     );
-}
+};
 
 const SuggestionList = ({ selectCustomer, suggestions, activeSuggestion }) => {
     return (
-        <ul className='suggestions'>
+        <ul className="suggestions">
             {suggestions.map((s, index) => {
                 let className;
 
@@ -74,5 +74,5 @@ const SuggestionList = ({ selectCustomer, suggestions, activeSuggestion }) => {
                 );
             })}
         </ul>
-    )
-}
+    );
+};

@@ -3,16 +3,18 @@ $red: #d3232b;
 
 form {
   label {
+    font-weight: 600;
     display: flex;
     flex-flow: column;
     gap: 0.2rem;
-    font-weight: 600;
+
     .checkbox {
       align-self: center;
-      margin-top: 8px;
       width: 1.5rem;
       height: 1.5rem;
+      margin-top: 8px;
     }
+
     & > .dropdown, input {
       width: 11rem;
     }
@@ -20,20 +22,22 @@ form {
 
   textarea {
     font-family: 'Montserrat', sans-serif;
-    padding: 0.6rem;
     font-size: 1rem;
+    padding: 0.6rem;
   }
 
   .customer-area {
     display: grid;
+    justify-content: space-between;
     grid-template-columns: 40% 55%;
     gap: 2rem;
-    justify-content: space-between;
+
     label {
       display: flex;
       flex-flow: column;
       gap: 0.2rem;
     }
+
     input {
       width: 100%;
     }
@@ -42,10 +46,11 @@ form {
       display: flex;
       flex-direction: column;
       gap: 0.2rem;
+
       & > div {
         display: grid;
-        grid-template-columns: 60% 10% 28%;
         justify-content: space-between;
+        grid-template-columns: 60% 10% 28%;
       }
     }
   }
@@ -53,25 +58,28 @@ form {
   .button-area {
     display: flex;
     gap: 1rem;
+
     .btn-form {
-      width: 6rem;
-      height: 2.5rem;
-      background: $blue;
-      color: white;
       font-size: 1.2rem;
       font-weight: 700;
+      width: 6rem;
+      height: 2.5rem;
+      color: white;
       border: none;
       border-radius: 5px;
+      background: $blue;
+
       &:hover {
         cursor: pointer;
       }
     }
+
     .delete {
       margin-left: auto;
+
       &:hover {
         background: $red;
       }
     }
   }
 }
-

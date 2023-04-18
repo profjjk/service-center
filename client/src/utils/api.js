@@ -6,24 +6,24 @@ const getAuthHeader = () => {
     if (token) {
         return { 'service-center': token };
     }
-}
+};
 
 export const API = {
     // JOBS
     createJob(newJob) {
-        return api.post('/jobs', newJob, { headers: getAuthHeader() })
+        return api.post('/jobs', newJob, { headers: getAuthHeader() });
     },
     getJobs(companyId) {
-        return api.get(`/jobs/${companyId}`, { headers: getAuthHeader() })
+        return api.get(`/jobs/${companyId}`, { headers: getAuthHeader() });
     },
     updateJob(jobId, data) {
-        return api.put(`/jobs/${jobId}`, data, { headers: getAuthHeader() })
+        return api.put(`/jobs/${jobId}`, data, { headers: getAuthHeader() });
     },
     deleteJob(jobId) {
-        return api.delete(`/jobs/${jobId}`, { headers: getAuthHeader() })
+        return api.delete(`/jobs/${jobId}`, { headers: getAuthHeader() });
     },
     deleteJobsByCustomer(customerId) {
-        return api.delete(`jobs/many/${customerId}`, { headers: getAuthHeader() })
+        return api.delete(`jobs/many/${customerId}`, { headers: getAuthHeader() });
     },
 
     // CUSTOMERS
@@ -78,4 +78,4 @@ export const API = {
     login(credentials) {
         return api.post(`/auth/login`, credentials);
     }
-}
+};

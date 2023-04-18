@@ -1,5 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
-import { Home, Dashboard, Customers, Jobs, Inventory, Authorization } from '../pages';
+import { Route, Routes } from 'react-router-dom';
+import { Authorization, Customers, Dashboard, Home, Inventory, Jobs } from '../pages';
 import { Navbar } from '../layouts';
 import { useUser } from '../components';
 import './style/main.scss';
@@ -8,15 +8,15 @@ const App = () => {
     const { user } = useUser();
     return (
         <>
-            <Navbar />
+            <Navbar/>
             <Routes>
-                <Route path={'/'} element={<Home/>} />
-                <Route path={'/auth'} element={<Authorization/>} />
+                <Route path={'/'} element={<Home/>}/>
+                <Route path={'/auth'} element={<Authorization/>}/>
                 {user && <>
-                    <Route path={'/dashboard'} element={<Dashboard/>} />
-                    <Route path={'/customers'} element={<Customers/>} />
-                    <Route path={'/jobs'} element={<Jobs/>} />
-                    <Route path={'/inventory'} element={<Inventory/>} />
+                    <Route path={'/dashboard'} element={<Dashboard/>}/>
+                    <Route path={'/customers'} element={<Customers/>}/>
+                    <Route path={'/jobs'} element={<Jobs/>}/>
+                    <Route path={'/inventory'} element={<Inventory/>}/>
                 </>}
             </Routes>
         </>

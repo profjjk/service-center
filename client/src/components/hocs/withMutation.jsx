@@ -1,4 +1,4 @@
-import { useQueryClient, useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { API } from '../../utils';
 
 export const withMutation = (Component) => (props) => {
@@ -72,5 +72,5 @@ export const withMutation = (Component) => (props) => {
             mutateCustomer={{ add: addCustomer, edit: editCustomer, remove: removeCustomer, clear: clearCustomers }}
             mutatePart={{ add: addPart, edit: editPart, remove: removePart }}
         />
-    )
-}
+    );
+};

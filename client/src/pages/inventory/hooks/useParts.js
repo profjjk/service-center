@@ -7,8 +7,10 @@ const getParts = async (companyId) => {
             const { data } = await API.getParts(companyId);
             return data;
         }
-    } catch(err) { console.error(err) }
-}
+    } catch (err) {
+        console.error(err);
+    }
+};
 
 export const useParts = () => {
     const companyId = getStoredUser()?.company;
@@ -18,9 +20,9 @@ export const useParts = () => {
         () => getParts(companyId),
         {
             enabled: !!companyId,
-            initialData: [],
+            initialData: []
         }
-    )
+    );
 
     return { parts };
-}
+};

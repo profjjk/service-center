@@ -1,9 +1,9 @@
-import {Notifications} from './Notifications';
-import {Revenue} from './Revenue';
-import {Calendar} from './Calendar';
-import './style.scss';
+import { Notifications } from './Notifications';
+import { Revenue } from './Revenue';
+import { Calendar } from './Calendar';
 import { useJobs } from '../jobs/hooks/useJobs';
 import { useParts } from '../inventory/hooks/useParts';
+import './style.scss';
 
 export const Dashboard = () => {
     const { jobs } = useJobs();
@@ -12,13 +12,13 @@ export const Dashboard = () => {
     return (
         <main>
             <section id={'top-section'}>
-                <Notifications jobs={jobs} parts={parts} />
-                <Revenue jobs={jobs} />
+                <Notifications jobs={jobs} parts={parts}/>
+                <Revenue jobs={jobs}/>
             </section>
 
             <section>
-                <Calendar jobs={jobs} />
+                <Calendar jobs={jobs}/>
             </section>
         </main>
-    )
-}
+    );
+};

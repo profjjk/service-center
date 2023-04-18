@@ -10,41 +10,41 @@ export const Table = ({ setSelected, setShowForm, setSubmitType, headers, rows }
     return (
         <table>
             <thead>
-                <tr className={`tr-${pathname.slice(1)}`}>
-                    {headers.map((header) => (
-                        <th key={header}>{header}</th>
-                    ))}
-                </tr>
+            <tr className={`tr-${pathname.slice(1)}`}>
+                {headers.map((header) => (
+                    <th key={header}>{header}</th>
+                ))}
+            </tr>
             </thead>
 
             <tbody>
-                {rows.map((r) => (
-                    <tr
-                        className={`
+            {rows.map((r) => (
+                <tr
+                    className={`
                             tr-${pathname.slice(1)} 
                             clickable
                             ${r?.status === 'Pending' ? 'pending' : ''}
                         `}
-                        key={r._id}
-                        onClick={() => {
-                            setSelected({
-                                job: pathname === '/jobs' ? r : null,
-                                customer: pathname === '/customers' ? r : r?.customer,
-                                part: pathname === '/inventory' ? r : null,
-                            });
-                            setSubmitType('edit');
-                            setShowForm(true);
-                        }}
-                    >
-                        {pathname === '/customers' && <CustomerDataRow customer={r} />}
-                        {pathname === '/jobs' && <JobDataRow job={r} />}
-                        {pathname === '/inventory' && <PartDataRow part={r} />}
-                    </tr>
-                ))}
+                    key={r._id}
+                    onClick={() => {
+                        setSelected({
+                            job: pathname === '/jobs' ? r : null,
+                            customer: pathname === '/customers' ? r : r?.customer,
+                            part: pathname === '/inventory' ? r : null
+                        });
+                        setSubmitType('edit');
+                        setShowForm(true);
+                    }}
+                >
+                    {pathname === '/customers' && <CustomerDataRow customer={r}/>}
+                    {pathname === '/jobs' && <JobDataRow job={r}/>}
+                    {pathname === '/inventory' && <PartDataRow part={r}/>}
+                </tr>
+            ))}
             </tbody>
         </table>
-    )
-}
+    );
+};
 
 const CustomerDataRow = ({ customer }) => {
     return (
@@ -58,8 +58,8 @@ const CustomerDataRow = ({ customer }) => {
             <td>{customer?.contactName ? customer?.contactName : '--'}</td>
             <td>{customer?.phone}</td>
         </>
-    )
-}
+    );
+};
 
 const JobDataRow = ({ job }) => {
     return (
@@ -70,8 +70,8 @@ const JobDataRow = ({ job }) => {
             <td>{job?.invoiceNumber ? job?.invoiceNumber : '--'}</td>
             <td>{job?.status}</td>
         </>
-    )
-}
+    );
+};
 
 const PartDataRow = ({ part }) => {
     return (
@@ -80,8 +80,8 @@ const PartDataRow = ({ part }) => {
             <td>{part?.description}</td>
             <td>{part?.stock}</td>
         </>
-    )
-}
+    );
+};
 
 // const PartDataRow = ({ setSelected, setShowForm, decreaseStock, increaseStock, part }) => {
 //     return (

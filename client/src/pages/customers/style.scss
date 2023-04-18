@@ -6,17 +6,20 @@ $blue: #185adb;
 /* HISTORY */
 .customer-history {
   margin-top: 3rem;
+
   h2 {
     font-size: 1.6rem;
     font-weight: 400;
-    color: $blue;
     text-align: center;
+    color: $blue;
   }
 }
+
 .tr-history {
   display: grid;
   grid-template-columns: 2fr 10fr;
 }
+
 .tbody-history {
   max-height: 12rem;
 }

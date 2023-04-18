@@ -8,15 +8,15 @@ $yellow: #ffc947;
 nav {
   position: fixed;
   z-index: 2;
-  padding: 0 2rem;
   top: 0;
-  left: 0;
   right: 0;
-  height: 50px;
-  background: $blue;
+  left: 0;
   display: grid;
-  grid-template-columns: 2fr 3fr 1fr;
   align-items: center;
+  height: 50px;
+  padding: 0 2rem;
+  background: $blue;
+  grid-template-columns: 2fr 3fr 1fr;
 
   a {
     color: #fff;
@@ -25,10 +25,12 @@ nav {
   ul {
     display: flex;
     justify-content: center;
-    gap: 4rem;
     list-style: none;
+    gap: 4rem;
+
     a {
       font-weight: bolder;
+
       &.active, &:hover {
         text-decoration: underline;
         text-decoration-color: $yellow;
@@ -41,6 +43,7 @@ nav {
 
   div:first-of-type {
     font-size: 1.4rem;
+
     a {
       font-weight: bold;
       color: $yellow;

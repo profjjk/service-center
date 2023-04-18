@@ -4,8 +4,8 @@ import dayjs from 'dayjs';
 
 export const Revenue = ({ jobs }) => {
     // STATE
-    const [revenue, setRevenue] = useState(0);
-    const [outstanding, setOutstanding] = useState(0);
+    const [ revenue, setRevenue ] = useState(0);
+    const [ outstanding, setOutstanding ] = useState(0);
     // VARIABLES
     const year = dayjs(new Date()).format('YYYY');
     const dollarUSLocale = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
@@ -14,7 +14,7 @@ export const Revenue = ({ jobs }) => {
     useEffect(() => {
         addRevenue();
         addOutstanding();
-    }, [jobs]);
+    }, [ jobs ]);
 
     // FUNCTIONS
     const addRevenue = () => {
@@ -25,16 +25,16 @@ export const Revenue = ({ jobs }) => {
             }
         }
         setRevenue(dollarUSLocale.format(totalRevenue));
-    }
+    };
     const addOutstanding = () => {
         let unpaid = 0;
         for (let job of jobs) {
-            if (dayjs(job.serviceDate).format('YYYY') <= year  && !job.isPaid) {
+            if (dayjs(job.serviceDate).format('YYYY') <= year && !job.isPaid) {
                 unpaid += job.totalBill;
             }
         }
         setOutstanding(dollarUSLocale.format(unpaid));
-    }
+    };
 
     // RETURNED COMPONENT
     return (
@@ -49,5 +49,5 @@ export const Revenue = ({ jobs }) => {
                 {outstanding} outstanding
             </Link>
         </section>
-    )
-}
+    );
+};

@@ -1,10 +1,4 @@
-import {
-    API,
-    clearStoredToken,
-    getStoredUser,
-    clearStoredUser,
-    setStoredUser
-} from '../../../utils';
+import { API, clearStoredToken, clearStoredUser, getStoredUser, setStoredUser } from '../../../utils';
 import { useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,12 +8,12 @@ const getUser = async (userId) => {
             const { data } = await API.getUser(userId);
             return data;
         }
-    } catch(err) {
+    } catch (err) {
         clearStoredToken();
         clearStoredUser();
         console.error(err);
     }
-}
+};
 
 export const useUser = () => {
     const qc = useQueryClient();
@@ -38,14 +32,14 @@ export const useUser = () => {
                 }
             }
         }
-    )
+    );
 
     const clearUser = () => {
         clearStoredUser();
         clearStoredToken();
-        qc.removeQueries(['user']);
-        navigate("/auth")
-    }
+        qc.removeQueries([ 'user' ]);
+        navigate('/auth');
+    };
 
-    return { user, clearUser }
-}
+    return { user, clearUser };
+};

@@ -5,9 +5,10 @@ $blue: #185adb;
   display: flex;
 
   div {
-    margin-left: 0.8rem;
     align-self: center;
+    margin-left: 0.8rem;
     color: $blue;
+
     &:hover {
       cursor: pointer;
     }
@@ -21,7 +22,7 @@ $blue: #185adb;
 }
 
 .search {
+  font-size: 1rem;
   min-width: 22rem;
   padding: 0.6rem 0.5rem 0.5rem 2.2rem;
-  font-size: 1rem;
 }

@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { useUser, withMutation } from '../../components';
 import { useJobs } from './hooks/useJobs';
-import { Searchbar, Dropdown } from '../../features';
-import { Table, Form } from '../../layouts';
-import { formatJob, formatCustomer } from '../../utils';
+import { Dropdown, Searchbar } from '../../features';
+import { Form, Table } from '../../layouts';
+import { formatCustomer, formatJob } from '../../utils';
 import './style.scss';
 
 const Jobs = ({ mutateJob, mutateCustomer }) => {
-    const [showForm, setShowForm] = useState(false);
-    const [search, setSearch] = useState('');
-    const [selected, setSelected] = useState({ job: null, customer: null, part: null });
-    const [submitType, setSubmitType] = useState('');
+    const [ showForm, setShowForm ] = useState(false);
+    const [ search, setSearch ] = useState('');
+    const [ selected, setSelected ] = useState({ job: null, customer: null, part: null });
+    const [ submitType, setSubmitType ] = useState('');
     const { user } = useUser();
     const { jobs } = useJobs();
 
@@ -22,8 +22,8 @@ const Jobs = ({ mutateJob, mutateCustomer }) => {
             (j?.serviceDate !== null && j?.serviceDate.includes(search)) ||
             (j?.invoiceNumber !== null && j?.invoiceNumber.includes(search)) ||
             j?.status.includes(search)
-        ))
-    }
+        ));
+    };
 
     // EVENT HANDLERS
     const submitHandler = async (e, formData) => {
@@ -54,21 +54,21 @@ const Jobs = ({ mutateJob, mutateCustomer }) => {
 
         setSelected({ job: null, customer: null, part: null });
         setShowForm(false);
-    }
+    };
 
     const deleteHandler = async (e) => {
         e.preventDefault();
         const jobId = e.target.dataset.id;
         const confirmation = window.confirm(
-            "Are you sure you want to delete?" +
-            "\nThis cannot be undone."
+            'Are you sure you want to delete?' +
+            '\nThis cannot be undone.'
         );
         if (confirmation) {
             await mutateJob.remove.mutate(jobId);
             setSelected({ job: null, customer: null, part: null });
             setShowForm(false);
         }
-    }
+    };
 
     return (
         <main>
@@ -90,13 +90,13 @@ const Jobs = ({ mutateJob, mutateCustomer }) => {
                                 setSearch={setSearch}
                                 placeholder={'Search by name, city, date, or invoice'}
                             />
-                            <Dropdown setSearch={setSearch} />
+                            <Dropdown setSearch={setSearch}/>
                         </div>
                         <Table
                             setSelected={setSelected}
                             setShowForm={setShowForm}
                             setSubmitType={setSubmitType}
-                            headers={['Service Date', 'Business Name', 'City', 'Invoice #', 'Status']}
+                            headers={[ 'Service Date', 'Business Name', 'City', 'Invoice #', 'Status' ]}
                             rows={applyFilter(jobs)}
                         />
                         {jobs.length < 1 && <p className={'empty-list'}>** No jobs to display **</p>}
@@ -116,7 +116,7 @@ const Jobs = ({ mutateJob, mutateCustomer }) => {
                 )
             }
         </main>
-    )
-}
+    );
+};
 
 export default withMutation(Jobs);

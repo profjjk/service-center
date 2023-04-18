@@ -8,4 +8,4 @@ export {
     getStoredUser,
     setStoredUser,
     clearStoredUser
-} from './storage'
+} from './storage';

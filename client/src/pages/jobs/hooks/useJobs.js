@@ -7,8 +7,10 @@ const getJobs = async (companyId) => {
             const { data } = await API.getJobs(companyId);
             return data;
         }
-    } catch(err) { console.error(err) }
-}
+    } catch (err) {
+        console.error(err);
+    }
+};
 
 export const useJobs = () => {
     const companyId = getStoredUser()?.company;
@@ -18,9 +20,9 @@ export const useJobs = () => {
         () => getJobs(companyId),
         {
             enabled: !!companyId,
-            initialData: [],
+            initialData: []
         }
-    )
+    );
 
     return { jobs };
-}
+};

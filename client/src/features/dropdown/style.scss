@@ -1,18 +1,20 @@
 .dropdown {
+  position: relative;
   width: 100%;
   max-width: 12rem;
-  position: relative;
+
   .faChevronDown {
-    z-index: -1;
     position: absolute;
-    right: 12px;
+    z-index: -1;
     top: 12px;
+    right: 12px;
   }
+
   select {
-    background: transparent;
-    appearance: none;
-    cursor: pointer;
     width: 100%;
     padding-right: 1.8rem;
+    cursor: pointer;
+    background: transparent;
+    appearance: none;
   }
 }

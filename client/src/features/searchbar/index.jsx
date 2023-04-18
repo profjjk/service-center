@@ -6,11 +6,11 @@ export const Searchbar = ({ placeholder, setSearch }) => {
     const searchJobs = (e) => {
         e.preventDefault();
         setSearch(e.currentTarget.value);
-    }
+    };
 
     return (
         <div className={'searchbar'}>
-            <FontAwesomeIcon className={'faSearch'} icon={faSearch} />
+            <FontAwesomeIcon className={'faSearch'} icon={faSearch}/>
             <input
                 className={'search'}
                 name={'search'}
@@ -19,5 +19,5 @@ export const Searchbar = ({ placeholder, setSearch }) => {
                 placeholder={placeholder}
             />
         </div>
-    )
-}
+    );
+};

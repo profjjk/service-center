@@ -7,10 +7,10 @@ import { formatCustomer } from '../../utils';
 import './style.scss';
 
 const Customers = ({ mutateCustomer, mutateJob }) => {
-    const [showForm, setShowForm] = useState(false);
-    const [search, setSearch] = useState('');
-    const [selected, setSelected] = useState({ job: null, customer: null, part: null });
-    const [submitType, setSubmitType] = useState('new');
+    const [ showForm, setShowForm ] = useState(false);
+    const [ search, setSearch ] = useState('');
+    const [ selected, setSelected ] = useState({ job: null, customer: null, part: null });
+    const [ submitType, setSubmitType ] = useState('new');
     const { user } = useUser();
     const { customers } = useCustomers();
 
@@ -20,8 +20,8 @@ const Customers = ({ mutateCustomer, mutateJob }) => {
             c?.businessName.toLowerCase().includes(search.toLowerCase()) ||
             c?.address?.city.toLowerCase().includes(search.toLowerCase()) ||
             c?.phone.includes(search)
-        ))
-    }
+        ));
+    };
 
     // EVENT HANDLERS
     const submitHandler = async (e, formData) => {
@@ -39,14 +39,14 @@ const Customers = ({ mutateCustomer, mutateJob }) => {
 
         setSelected({ job: null, customer: null, part: null });
         setShowForm(false);
-    }
+    };
 
     const deleteHandler = async (e) => {
         e.preventDefault();
         const customerId = e.target.dataset.id;
         const confirmation = window.confirm(
-            "Are you sure you want to delete?" +
-            "\nThis cannot be undone."
+            'Are you sure you want to delete?' +
+            '\nThis cannot be undone.'
         );
         if (confirmation) {
             await mutateJob.clear.mutate(customerId);
@@ -54,7 +54,7 @@ const Customers = ({ mutateCustomer, mutateJob }) => {
             setSelected({ customer: null });
             setShowForm(false);
         }
-    }
+    };
 
     return (
         <main>
@@ -79,7 +79,7 @@ const Customers = ({ mutateCustomer, mutateJob }) => {
                             setSelected={setSelected}
                             setShowForm={setShowForm}
                             setSubmitType={setSubmitType}
-                            headers={['Business Name', 'Address', 'Contact', 'Phone #']}
+                            headers={[ 'Business Name', 'Address', 'Contact', 'Phone #' ]}
                             rows={applyFilter(customers)}
                         />
                         {customers.length < 1 && <p className={'empty-list'}>** No customers to display **</p>}
@@ -97,7 +97,7 @@ const Customers = ({ mutateCustomer, mutateJob }) => {
                 )
             }
         </main>
-    )
-}
+    );
+};
 
 export default withMutation(Customers);
