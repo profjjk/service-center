@@ -65,11 +65,54 @@ tbody {
   }
 }
 
+
 .tr-inventory {
-  grid-template-columns: 1fr 5fr 1fr;
+  grid-template-columns: 1fr 5fr 1fr 1fr;
   th, td {
     &:nth-of-type(1), &:nth-of-type(2) {
       text-align: left;
     }
   }
+
+  .stock-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 20%);
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    div {
+      width: 1.5rem;
+      padding: 2px;
+      font-size: 1rem;
+      border: 1px solid black;
+      border-radius: 50%;
+    }
+  }
 }
+
+//.inventory tr {
+//  background: white;
+//  border-radius: 5px;
+//  margin: 5px 0;
+//  border: 1px solid $blue;
+//  box-shadow: 0 1px 1px rgb(0 0 0 / 0.2);
+//}
+//
+//.quantity {
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//}
+//
+//.quantity:hover {
+//  cursor: pointer;
+//  background-color: $blue;
+//  color: white;
+//}
+//
+//.edit:hover {
+//  cursor: pointer;
+//  path {
+//    fill: $blue;
+//  }
+//}

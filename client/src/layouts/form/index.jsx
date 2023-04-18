@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faDollarSign, faHashtag } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
 
-export const Form = ({ submitHandler, deleteHandler, setShowForm, setSelected, setSubmitType, job, customer }) => {
+export const Form = ({ submitHandler, deleteHandler, setShowForm, setSelected, setSubmitType, job, customer, part }) => {
     const { pathname } = useLocation();
 
     const validateForm = (e) => {
@@ -20,30 +20,65 @@ export const Form = ({ submitHandler, deleteHandler, setShowForm, setSelected, s
 
     return (
         <form
-            id={(job || pathname === '/jobs') ? 'job-form' : 'customer-form'}
+            id={'form'}
             data-customer={customer && customer?._id}
             data-job={job && job?._id}
             onSubmit={validateForm}
         >
+            {(part || pathname === '/inventory') && <PartData part={part} />}
+
             {(job || pathname === '/jobs') && <JobData job={job} />}
 
-            <CustomerData
-                setSelected={setSelected}
-                setSubmitType={setSubmitType}
-                pathname={pathname}
-                customer={customer}
-            />
+            {(customer || pathname === '/customers') &&
+                <CustomerData
+                    setSelected={setSelected}
+                    setSubmitType={setSubmitType}
+                    pathname={pathname}
+                    customer={customer}
+                />
+            }
 
-            {(job || pathname === '/jobs')  ? <JobNotes job={job} /> : <CustomerNotes customer={customer} />}
+            {(job || pathname === '/jobs') && <JobNotes job={job} />}
+
+            {(customer || pathname === '/customers') && <CustomerNotes customer={customer} />}
 
             <ButtonArea
                 setShowForm={setShowForm}
                 deleteHandler={deleteHandler}
                 setSelected={setSelected}
+                pathname={pathname}
                 job={job}
                 customer={customer}
+                part={part}
             />
         </form>
+    )
+}
+
+const PartData = ({ decreaseStock, increaseStock, part }) => {
+    return (
+        <div className={'part-area'}>
+            <label>
+                Part #
+                <input className={'text-center'} type={'text'} name={'partNumber'}
+                       defaultValue={part ? part.partNumber : ''}
+                />
+            </label>
+
+            <label>
+                Description
+                <input type={'text'} name={'description'}
+                       defaultValue={part ? part.description : ''}
+                />
+            </label>
+
+            <label>
+                In Stock
+                <input className={'text-center'} type={'text'} name={'stock'}
+                       defaultValue={part ? part.stock : ''}
+                />
+            </label>
+        </div>
     )
 }
 
@@ -84,8 +119,8 @@ const JobData = ({ job }) => {
             <label>
                 Total Bill
                 <div className={'dollarInput'}>
-                    <FontAwesomeIcon className={"faDollarSign"} icon={faDollarSign}/>
-                    <input type={"text"} name={"totalBill"}
+                    <FontAwesomeIcon className={'faDollarSign'} icon={faDollarSign}/>
+                    <input type={'text'} name={'totalBill'}
                            defaultValue={job && job?.totalBill }/>
                 </div>
             </label>
@@ -167,7 +202,7 @@ const CustomerNotes = ({ customer }) => {
     )
 }
 
-const ButtonArea = ({ deleteHandler, setShowForm, setSelected, job, customer }) => {
+const ButtonArea = ({ deleteHandler, setShowForm, setSelected, pathname, job, customer, part }) => {
     return (
         <div className={'button-area'}>
             <button className={'btn-form'} type={'submit'}>
@@ -175,7 +210,7 @@ const ButtonArea = ({ deleteHandler, setShowForm, setSelected, job, customer }) 
             </button>
 
             <button className={'btn-form'} onClick={() => {
-                setSelected({ job: null, customer: null })
+                setSelected({ job: null, customer: null, part: null })
                 setShowForm(false)
             }}>
                 Cancel
@@ -185,6 +220,7 @@ const ButtonArea = ({ deleteHandler, setShowForm, setSelected, job, customer }) 
                 (<button
                     className={'btn-form delete'}
                     data-id={job ? job._id : customer._id}
+
                     onClick={deleteHandler}
                 >
                     Delete

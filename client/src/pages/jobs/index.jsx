@@ -9,7 +9,7 @@ import './style.scss';
 const Jobs = ({ mutateJob, mutateCustomer }) => {
     const [showForm, setShowForm] = useState(false);
     const [search, setSearch] = useState('');
-    const [selected, setSelected] = useState({ job: null, customer: null });
+    const [selected, setSelected] = useState({ job: null, customer: null, part: null });
     const [submitType, setSubmitType] = useState('');
     const { user } = useUser();
     const { jobs } = useJobs();
@@ -52,7 +52,7 @@ const Jobs = ({ mutateJob, mutateCustomer }) => {
             await mutateJob.add.mutate(job);
         }
 
-        setSelected({ job: null, customer: null });
+        setSelected({ job: null, customer: null, part: null });
         setShowForm(false);
     }
 
@@ -65,7 +65,7 @@ const Jobs = ({ mutateJob, mutateCustomer }) => {
         );
         if (confirmation) {
             await mutateJob.remove.mutate(jobId);
-            setSelected({ job: null, customer: null });
+            setSelected({ job: null, customer: null, part: null });
             setShowForm(false);
         }
     }

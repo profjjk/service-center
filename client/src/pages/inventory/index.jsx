@@ -7,7 +7,7 @@ import { Form, Table } from '../../layouts';
 const Inventory = ({ mutatePart }) => {
     const [showForm, setShowForm] = useState(false);
     const [search, setSearch] = useState('');
-    const [selected, setSelected] = useState({ customer: null });
+    const [selected, setSelected] = useState({ job: null, customer: null, part: null });
     const [submitType, setSubmitType] = useState('new');
     const { user } = useUser();
     const { parts } = useParts();
@@ -29,6 +29,14 @@ const Inventory = ({ mutatePart }) => {
     const deleteHandler = async (e) => {
         e.preventDefault();
 
+    }
+
+    const increaseStock = async (e) => {
+        e.preventDefault();
+    }
+
+    const decreaseStock = async (e) => {
+        e.preventDefault();
     }
 
     return (
@@ -54,6 +62,8 @@ const Inventory = ({ mutatePart }) => {
                             setSelected={setSelected}
                             setShowForm={setShowForm}
                             setSubmitType={setSubmitType}
+                            decreaseStock={decreaseStock}
+                            increaseStock={increaseStock}
                             headers={['Part #', 'Description', 'In Stock']}
                             rows={applyFilter(parts)}
                         />
@@ -62,10 +72,11 @@ const Inventory = ({ mutatePart }) => {
                 ) : (
                     <section>
                         <Form
+                            setSelected={setSelected}
                             submitHandler={submitHandler}
                             deleteHandler={deleteHandler}
                             setShowForm={setShowForm}
-                            part={selected.part}
+                            part={selected?.part}
                         />
                     </section>
                 )

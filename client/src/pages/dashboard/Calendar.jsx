@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import dayjs from 'dayjs';
 
-const Calendar = ({ jobs }) => {
+export const Calendar = ({ jobs }) => {
     const qc = useQueryClient();
     const [jobList, setJobList] = useState([]);
     const [days, setDays] = useState([]);
@@ -63,5 +63,3 @@ const Calendar = ({ jobs }) => {
         </section>
     )
 }
-
-export default Calendar;

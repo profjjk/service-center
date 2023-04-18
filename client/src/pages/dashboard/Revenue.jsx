@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 
-const Revenue = ({ jobs }) => {
+export const Revenue = ({ jobs }) => {
     // STATE
     const [revenue, setRevenue] = useState(0);
     const [outstanding, setOutstanding] = useState(0);
     // VARIABLES
     const year = dayjs(new Date()).format('YYYY');
-    const dollarUSLocale = Intl.NumberFormat('en-US');
+    const dollarUSLocale = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 
     // LIFECYCLE EVENTS
     useEffect(() => {
@@ -38,18 +38,16 @@ const Revenue = ({ jobs }) => {
 
     // RETURNED COMPONENT
     return (
-        <section className={"section-revenue"}>
+        <section className={'section-revenue'}>
             <h2>YTD SERVICE REVENUE</h2>
 
-            <p className={"revenue"}>
-                ${revenue}
+            <p className={'revenue'}>
+                {revenue}
             </p>
 
-            <Link className={"outstanding"} to={'/service/unpaid'}>
-                ${outstanding} outstanding
+            <Link className={'outstanding'} to={'/jobs'}>
+                {outstanding} outstanding
             </Link>
         </section>
     )
 }
-
-export default Revenue;

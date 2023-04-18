@@ -9,7 +9,7 @@ import './style.scss';
 const Customers = ({ mutateCustomer, mutateJob }) => {
     const [showForm, setShowForm] = useState(false);
     const [search, setSearch] = useState('');
-    const [selected, setSelected] = useState({ customer: null });
+    const [selected, setSelected] = useState({ job: null, customer: null, part: null });
     const [submitType, setSubmitType] = useState('new');
     const { user } = useUser();
     const { customers } = useCustomers();
@@ -37,7 +37,7 @@ const Customers = ({ mutateCustomer, mutateJob }) => {
             await mutateCustomer.add.mutate(customer);
         }
 
-        setSelected({ customer: null });
+        setSelected({ job: null, customer: null, part: null });
         setShowForm(false);
     }
 
@@ -87,10 +87,11 @@ const Customers = ({ mutateCustomer, mutateJob }) => {
                 ) : (
                     <section>
                         <Form
+                            setSelected={setSelected}
                             submitHandler={submitHandler}
                             deleteHandler={deleteHandler}
                             setShowForm={setShowForm}
-                            customer={selected.customer}
+                            customer={selected?.customer}
                         />
                     </section>
                 )

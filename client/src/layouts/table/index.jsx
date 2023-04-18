@@ -20,7 +20,11 @@ export const Table = ({ setSelected, setShowForm, setSubmitType, headers, rows }
             <tbody>
                 {rows.map((r) => (
                     <tr
-                        className={`tr-${pathname.slice(1)} clickable ${r?.status === 'Pending' ? 'pending' : ''}`}
+                        className={`
+                            tr-${pathname.slice(1)} 
+                            clickable
+                            ${r?.status === 'Pending' ? 'pending' : ''}
+                        `}
                         key={r._id}
                         onClick={() => {
                             setSelected({
@@ -70,7 +74,6 @@ const JobDataRow = ({ job }) => {
 }
 
 const PartDataRow = ({ part }) => {
-    console.log(part)
     return (
         <>
             <td>{part?.partNumber}</td>
@@ -79,3 +82,26 @@ const PartDataRow = ({ part }) => {
         </>
     )
 }
+
+// const PartDataRow = ({ setSelected, setShowForm, decreaseStock, increaseStock, part }) => {
+//     return (
+//         <>
+//             <td>{part?.partNumber}</td>
+//             <td>{part?.description}</td>
+//             <td className={'stock-buttons'}>
+//                 <div className={'quantity'} onClick={decreaseStock}>&#8722;</div>
+//                 {part?.stock}
+//                 <div className={'quantity'} onClick={increaseStock}>&#43;</div>
+//             </td>
+//             <td>
+//                 <FontAwesomeIcon
+//                     className={'edit'}
+//                     onClick={() => {
+//                         setSelected
+//                     }}
+//                     icon={faEdit}
+//                 />
+//             </td>
+//         </>
+//     )
+// }
