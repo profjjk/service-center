@@ -1,7 +1,6 @@
 # development
 .idea
 .vscode
-*/scripts/*
 
 # dependencies
 */node_modules

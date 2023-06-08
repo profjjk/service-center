@@ -1,0 +1,37 @@
+[
+  {
+    "company": "",
+    "partNumber": "RA20020",
+    "description": "compressor",
+    "stock": 2,
+    "minimum": 2
+  },
+  {
+    "company": "",
+    "partNumber": "RA45678",
+    "description": "134-a filter-drier",
+    "stock": 12,
+    "minimum": 8
+  },
+  {
+    "company": "",
+    "partNumber": "RA42434",
+    "description": "high vacuum pump oil",
+    "stock": 8,
+    "minimum": 6
+  },
+  {
+    "company": "",
+    "partNumber": "RA12233",
+    "description": "12v solenoid",
+    "stock": 7,
+    "minimum": 4
+  },
+  {
+    "company": "",
+    "partNumber": "RA43430",
+    "description": "check valve",
+    "stock": 5,
+    "minimum": 4
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "company": "",
+    "customer": "",
+    "serviceDate": "",
+    "invoiceNumber": "45678",
+    "issueNotes": "3 machines need oil & filter changes",
+    "serviceNotes": "Serviced 3 machines",
+    "status": "Completed",
+    "totalBill": 378.40,
+    "isPaid": true
+  },
+  {
+    "company": "",
+    "customer": "",
+    "serviceDate": "",
+    "invoiceNumber": "46789",
+    "issueNotes": "3 machines need oil & filter changes",
+    "serviceNotes": "Serviced 3 machines",
+    "status": "Completed",
+    "totalBill": 1123.80,
+    "isPaid": true
+  },
+  {
+    "company": "",
+    "customer": "",
+    "serviceDate": "",
+    "invoiceNumber": "47685",
+    "issueNotes": "3 machines need oil & filter changes",
+    "serviceNotes": "",
+    "status": "Scheduled",
+    "totalBill": 0.00,
+    "isPaid": false
+  },
+  {
+    "company": "",
+    "customer": "",
+    "serviceDate": "",
+    "invoiceNumber": "45679",
+    "issueNotes": "3 machines need oil & filter changes",
+    "serviceNotes": "Serviced 3 machines",
+    "status": "Completed",
+    "totalBill": 378.40,
+    "isPaid": true
+  },
+  {
+    "company": "",
+    "customer": "",
+    "serviceDate": "",
+    "invoiceNumber": "46790",
+    "issueNotes": "3 machines need oil & filter changes",
+    "serviceNotes": "Serviced 3 machines",
+    "status": "Completed",
+    "totalBill": 378.40,
+    "isPaid": false
+  },
+  {
+    "company": "",
+    "customer": "",
+    "serviceDate": "",
+    "invoiceNumber": "",
+    "issueNotes": "Unit stuck in recovery mode",
+    "serviceNotes": "",
+    "status": "Pending",
+    "totalBill": 0.00,
+    "isPaid": false
+  }
+]
