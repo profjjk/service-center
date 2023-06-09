@@ -26,5 +26,61 @@
       "zipcode": "95812"
     },
     "notes": "Old machines with discontinued parts"
+  },
+  {
+    "company": "",
+    "businessName": "Elk Grove Ford",
+    "contactName": "Gerry",
+    "phone": "209-555-3322",
+    "address": {
+      "street1": "145 Auto Center Rd",
+      "street2": "",
+      "city": "Elk Grove",
+      "state": "CA",
+      "zipcode": "95823"
+    },
+    "notes": "1234-yf machine with frequent leak issues"
+  },
+  {
+    "company": "",
+    "businessName": "Caliber Collision",
+    "contactName": "Vanessa",
+    "phone": "209-555-3451",
+    "address": {
+      "street1": "9131 Elkmont Dr",
+      "street2": "",
+      "city": "Elk Grove",
+      "state": "CA",
+      "zipcode": "95622"
+    },
+    "notes": "1234-yf machine with frequent leak issues"
+  },
+  {
+    "company": "",
+    "businessName": "Idealease Trucking",
+    "contactName": "José",
+    "phone": "209-555-6587",
+    "address": {
+      "street1": "1001 Sinclair Way",
+      "street2": "",
+      "city": "Stockton",
+      "state": "CA",
+      "zipcode": "95213"
+    },
+    "notes": ""
+  },
+  {
+    "company": "",
+    "businessName": "AutoNation Chrysler Dodge",
+    "contactName": "Jeff",
+    "phone": "209-555-8657",
+    "address": {
+      "street1": "21 Automall Way",
+      "street2": "",
+      "city": "Roseville",
+      "state": "CA",
+      "zipcode": "95668"
+    },
+    "notes": ""
   }
 ]

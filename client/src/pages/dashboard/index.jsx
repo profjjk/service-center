@@ -10,7 +10,7 @@ export const Dashboard = () => {
     const { parts } = useParts();
 
     return (
-        <main>
+        <main id={'dashboard'}>
             <section id={'top-section'}>
                 <Notifications jobs={jobs} parts={parts}/>
                 <Revenue jobs={jobs}/>

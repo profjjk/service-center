@@ -47,12 +47,12 @@ export const Calendar = ({ jobs }) => {
                                 dayjs(job.serviceDate) > today.subtract(1, 'day') &&
                                 dayjs(job.serviceDate) < today.add(5, 'day')
                             )).sort((job1, job2) => (
-                                job1.customer.address.city.charCodeAt(0) - job2.customer.address.city.charCodeAt(0)
+                                job1.customer?.address?.city.charCodeAt(0) - job2.customer?.address?.city.charCodeAt(0)
                             )).map(job => (
                                 <p key={job._id} className={'calendar-job'} onClick={() => selectJob(job)}>
                                     <Link to={'/service/form'}>
-                                        {job.customer.businessName}<br/>
-                                        <span>{job.customer.address.city}</span>
+                                        {job.customer?.businessName}<br/>
+                                        <span>{job.customer?.address?.city}</span>
                                     </Link>
                                 </p>
                             ))}

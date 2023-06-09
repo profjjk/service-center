@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const { connect } = require('mongoose');
 require('./scripts/seedDB');
 require('dotenv').config();
 
@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
 const routes = require('./routes');
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017')
+connect(process.env.MONGODB_URI || 'mongodb://localhost:27017')
     .then(() => console.log('Connected to Service Center database.'))
     .catch(err => console.log('Failed to connect to database.' + '\n' + `Error: ${err.message}`));
 

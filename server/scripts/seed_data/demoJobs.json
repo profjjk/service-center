@@ -25,7 +25,7 @@
     "company": "",
     "customer": "",
     "serviceDate": "",
-    "invoiceNumber": "47685",
+    "invoiceNumber": "",
     "issueNotes": "3 machines need oil & filter changes",
     "serviceNotes": "",
     "status": "Scheduled",
@@ -62,6 +62,50 @@
     "issueNotes": "Unit stuck in recovery mode",
     "serviceNotes": "",
     "status": "Pending",
+    "totalBill": 0.00,
+    "isPaid": false
+  },
+  {
+    "company": "",
+    "customer": "",
+    "serviceDate": "",
+    "invoiceNumber": "",
+    "issueNotes": "Need maintenance",
+    "serviceNotes": "",
+    "status": "Scheduled",
+    "totalBill": 0.00,
+    "isPaid": false
+  },
+  {
+    "company": "",
+    "customer": "",
+    "serviceDate": "",
+    "invoiceNumber": "",
+    "issueNotes": "Need maintenance",
+    "serviceNotes": "",
+    "status": "Scheduled",
+    "totalBill": 0.00,
+    "isPaid": false
+  },
+  {
+    "company": "",
+    "customer": "",
+    "serviceDate": "",
+    "invoiceNumber": "",
+    "issueNotes": "Unit won't power on",
+    "serviceNotes": "",
+    "status": "Scheduled",
+    "totalBill": 0.00,
+    "isPaid": false
+  },
+  {
+    "company": "",
+    "customer": "",
+    "serviceDate": "",
+    "invoiceNumber": "",
+    "issueNotes": "Oil spilling from bottom of machine",
+    "serviceNotes": "",
+    "status": "Scheduled",
     "totalBill": 0.00,
     "isPaid": false
   }

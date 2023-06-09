@@ -43,7 +43,6 @@ export const Login = ({ setIsNew }) => {
                     <input
                         type={'email'}
                         name={'email'}
-                        defaultValue={'demo@demo.com'}
                         required
                     />
                 </label>
@@ -53,7 +52,6 @@ export const Login = ({ setIsNew }) => {
                     <input
                         type={'password'}
                         name={'password'}
-                        defaultValue={'password'}
                         required
                     />
                 </label>
