@@ -2,10 +2,12 @@ import { useLocation } from 'react-router';
 import { sortPendingToTop } from '../../utils';
 import dayjs from 'dayjs';
 import './style.scss';
+import { sortByStockStatus } from '../../utils/sort';
 
 export const Table = ({ setSelected, setShowForm, setSubmitType, headers, rows }) => {
-    rows = sortPendingToTop(rows);
     const { pathname } = useLocation();
+    if (pathname === '/jobs') rows = sortPendingToTop(rows);
+    if (pathname === '/inventory') rows = sortByStockStatus(rows);
 
     return (
         <table>
@@ -24,6 +26,7 @@ export const Table = ({ setSelected, setShowForm, setSubmitType, headers, rows }
                             tr-${pathname.slice(1)} 
                             clickable
                             ${r?.status === 'Pending' ? 'pending' : ''}
+                            ${r?.stock <= r?.minimum ? 'low-stock' : ''}
                         `}
                     key={r._id}
                     onClick={() => {

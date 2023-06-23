@@ -26,5 +26,14 @@ const sortPendingToTop = (jobs) => {
     return jobs;
 };
 
+const sortByStockStatus = (parts) => {
+    for (let i = 0; i < parts.length; i++) {
+        if (parts[i]?.stock <= parts[i]?.minimum) {
+            parts.unshift(parts.splice(i, 1)[0]);
+        }
+    }
+    return parts;
+};
 
-export { sortPendingToTop, sortByServiceDate };
+
+export { sortPendingToTop, sortByServiceDate, sortByStockStatus };

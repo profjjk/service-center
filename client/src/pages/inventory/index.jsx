@@ -86,3 +86,5 @@ const Inventory = ({ mutatePart }) => {
 };
 
 export default withMutation(Inventory);
+
+// TODO: Add a checkbox that will filter parts to only show those that are low stock.

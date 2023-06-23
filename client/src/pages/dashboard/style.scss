@@ -11,6 +11,10 @@ $dark: #0a1931;
 .section-notifications {
   min-height: 8rem;
   margin-bottom: 4rem;
+
+  h2 {
+    margin-bottom: 20px;
+  }
 }
 
 .notifications {
@@ -22,6 +26,7 @@ $dark: #0a1931;
 .notice {
   font-size: 1.1rem;
   font-weight: 600;
+  line-height: 1.5;
   width: max-content;
   text-decoration: none;
   color: red;
@@ -55,13 +60,16 @@ $dark: #0a1931;
   }
 }
 
+.revenue, .outstanding {
+  font-family: 'Inconsolata', monospace;
+}
+
 .revenue {
   font-size: 2.8rem;
   margin-bottom: 5px;
 }
 
 .outstanding {
-  font-size: 0.9rem;
   font-style: italic;
   width: max-content;
   text-decoration: none;
@@ -75,6 +83,12 @@ $dark: #0a1931;
 }
 
 // CALENDAR SECTION
+.section-calendar {
+  h2 {
+    margin-bottom: 10px;
+  }
+}
+
 .calendar {
   display: grid;
   justify-content: space-between;
