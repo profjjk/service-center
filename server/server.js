@@ -6,12 +6,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+const cors = require('cors');
 const corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200
 };
-
-const cors = require('cors');
 app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: true }));

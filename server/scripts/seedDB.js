@@ -76,6 +76,6 @@ const insertDemoData = async () => {
 };
 
 // daily update of demo data
-cron.schedule('* * * * *', () => {
+cron.schedule('0 0 * * *', () => {
     insertDemoData().then(() => console.log('Demo data has updated'));
 });
