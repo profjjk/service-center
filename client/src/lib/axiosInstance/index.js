@@ -5,7 +5,7 @@ let baseUrl;
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     baseUrl = 'http://localhost:8080/api';
 } else {
-    baseUrl = 'https://service-center-server.herokuapp.com/api';
+    baseUrl = 'https://service-center-166ef71039d6.herokuapp.com/api/';
 }
 
 console.log(process.env.NODE_ENV, baseUrl);
