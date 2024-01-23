@@ -13,6 +13,7 @@ $blue: #185adb;
     font-size: 3rem;
     max-width: fit-content;
     margin-top: 100px;
+    text-align: center;
     text-transform: uppercase;
   }
 
@@ -24,11 +25,11 @@ $blue: #185adb;
   #demo-login {
     font-weight: 300;
     margin-top: 25px;
+    color: $blue;
 
     &:hover {
       font-weight: 400;
       cursor: pointer;
-      color: $blue;
     }
   }
 }

@@ -37,11 +37,11 @@ const insertJobs = async (demoJobs, companyId, customerArray) => {
     demoJobs[9].customer = new Types.ObjectId(customerArray.insertedIds[5]);
 
     // assign service dates to jobs based on current day
-    demoJobs[0].serviceDate = dayjs().subtract(500, 'day').format('YYYY-MM-DD');
-    demoJobs[1].serviceDate = dayjs().subtract(50, 'day').format('YYYY-MM-DD');
+    demoJobs[0].serviceDate = dayjs().subtract(20, 'day').format('YYYY-MM-DD');
+    demoJobs[1].serviceDate = dayjs().subtract(10, 'day').format('YYYY-MM-DD');
     demoJobs[2].serviceDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
-    demoJobs[3].serviceDate = dayjs().subtract(380, 'day').format('YYYY-MM-DD');
-    demoJobs[4].serviceDate = dayjs().subtract(22, 'day').format('YYYY-MM-DD');
+    demoJobs[3].serviceDate = dayjs().subtract(15, 'day').format('YYYY-MM-DD');
+    demoJobs[4].serviceDate = dayjs().subtract(5, 'day').format('YYYY-MM-DD');
     demoJobs[6].serviceDate = dayjs().add(3, 'day').format('YYYY-MM-DD');
     demoJobs[7].serviceDate = dayjs().add(1, 'day').format('YYYY-MM-DD');
     demoJobs[8].serviceDate = dayjs().add(3, 'day').format('YYYY-MM-DD');
@@ -65,17 +65,15 @@ const insertParts = async (demoParts, companyId) => {
     }
 };
 
-const insertDemoData = async () => {
-    try {
-        const customers = await insertCustomers(demoCustomers, companyId);
-        await insertJobs(demoJobs, companyId, customers);
-        await insertParts(demoParts, companyId);
-    } catch (err) {
-        console.error(err);
-    }
+exports.runUpdates = () => {
+    const updateDemoData = cron.schedule('0 0 * * *', async () => {
+        try {
+            const customers = await insertCustomers(demoCustomers, companyId);
+            await insertJobs(demoJobs, companyId, customers);
+            await insertParts(demoParts, companyId);
+        } catch (err) {
+            console.error(err);
+        }
+    });
+    updateDemoData.start();
 };
-
-// daily update of demo data
-cron.schedule('0 0 * * *', () => {
-    insertDemoData().then(() => console.log('Demo data has updated'));
-});

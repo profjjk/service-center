@@ -5,12 +5,18 @@ import { Dropdown, Searchbar } from '../../features';
 import { Form, Table } from '../../layouts';
 import { formatCustomer, formatJob } from '../../utils';
 import './style.scss';
+import { useQueryClient } from 'react-query';
 
 const Jobs = ({ mutateJob, mutateCustomer }) => {
-    const [ showForm, setShowForm ] = useState(false);
+    const qc = useQueryClient();
     const [ search, setSearch ] = useState('');
-    const [ selected, setSelected ] = useState({ job: null, customer: null, part: null });
-    const [ submitType, setSubmitType ] = useState('');
+    const [ selected, setSelected ] = useState({
+        job: qc.getQueryData('selectedJob'),
+        customer: qc.getQueryData('selectedCustomer'),
+        part: null
+    });
+    const [ submitType, setSubmitType ] = useState(qc.getQueryData('submissionType') || '');
+    const [ showForm, setShowForm ] = useState(selected.job);
     const { user } = useUser();
     const { jobs } = useJobs();
 

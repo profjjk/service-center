@@ -29,7 +29,8 @@ export const Home = () => {
 
             <div>
                 <p id={'description'}>
-                    Boost efficiency and simplify operations with a comprehensive web application. Manage customers,
+                    Boost efficiency and simplify operations with a comprehensive Customer Relationship Manager. Manage
+                    customers,
                     track service jobs, and lookup invoices.
                 </p>
                 <p id={'demo-login'} onClick={loginDemo}>Try out the demo &rarr;</p>

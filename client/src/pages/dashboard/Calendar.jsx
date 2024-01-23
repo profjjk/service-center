@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import dayjs from 'dayjs';
 
@@ -8,6 +8,7 @@ export const Calendar = ({ jobs }) => {
     const [ jobList, setJobList ] = useState([]);
     const [ days, setDays ] = useState([]);
     const today = dayjs(new Date());
+    const navigate = useNavigate();
 
     useEffect(() => {
         setJobList(jobs.filter(job => job.status !== 'Canceled'));
@@ -49,11 +50,14 @@ export const Calendar = ({ jobs }) => {
                             )).sort((job1, job2) => (
                                 job1.customer?.address?.city.charCodeAt(0) - job2.customer?.address?.city.charCodeAt(0)
                             )).map(job => (
-                                <p key={job._id} className={'calendar-job'} onClick={() => selectJob(job)}>
-                                    <Link to={'/service/form'}>
+                                <p key={job._id} className={'calendar-job'} onClick={async () => {
+                                    await selectJob(job);
+                                    navigate('/jobs');
+                                }}>
+                                    <a>
                                         {job.customer?.businessName}<br/>
                                         <span>{job.customer?.address?.city}</span>
-                                    </Link>
+                                    </a>
                                 </p>
                             ))}
                         </div>

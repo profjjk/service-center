@@ -1,6 +1,5 @@
 const express = require('express');
 const { connect } = require('mongoose');
-require('./scripts/seedDB');
 require('dotenv').config();
 
 const app = express();
@@ -20,11 +19,18 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 }
 
+// import api routes
 const routes = require('./routes');
 app.use(routes);
 
+// connect to database
 connect(process.env.MONGODB_URI || 'mongodb://localhost:27017')
     .then(() => console.log('Connected to Service Center database.'))
     .catch(err => console.log('Failed to connect to database.' + '\n' + `Error: ${err.message}`));
 
+// update demo data daily
+const scheduledUpdates = require('./scripts/scheduledUpdates');
+scheduledUpdates.runUpdates();
+
+// start server
 app.listen(PORT, () => console.log(`Server listening on PORT ${PORT}`));

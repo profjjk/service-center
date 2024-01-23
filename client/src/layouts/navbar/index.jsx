@@ -1,8 +1,10 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth, useUser } from '../../components';
 import './style.scss';
+import { useQueryClient } from 'react-query';
 
 export const Navbar = () => {
+    const qc = useQueryClient();
     const { logout } = useAuth();
     const { user } = useUser();
 
@@ -12,6 +14,11 @@ export const Navbar = () => {
         { path: '/jobs', text: 'Service jobs' },
         { path: '/inventory', text: 'Inventory' }
     ];
+
+    const clearSelected = () => {
+        qc.setQueryData('selectedJob', null);
+        qc.setQueryData('selectedCustomer', null);
+    };
 
     return (
         <header>
@@ -23,7 +30,7 @@ export const Navbar = () => {
                 <ul>
                     {user &&
                         links.map(({ path, text }) => (
-                            <li key={path} className={'nav-item'}>
+                            <li key={path} className={'nav-item'} onClick={clearSelected}>
                                 <NavLink to={path}>
                                     {text}
                                 </NavLink>

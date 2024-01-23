@@ -7,15 +7,15 @@ $yellow: #ffc947;
 
 nav {
   position: fixed;
-  z-index: 2;
   top: 0;
-  right: 0;
-  left: 0;
   display: grid;
   align-items: center;
+  width: 100%;
+  max-width: 1500px;
   height: 50px;
+  margin: 0 auto 0 auto;
   padding: 0 2rem;
-  background: $blue;
+  justify-self: center;
   grid-template-columns: 2fr 3fr 1fr;
 
   a {
@@ -26,6 +26,7 @@ nav {
     display: flex;
     justify-content: center;
     list-style: none;
+    justify-self: center;
     gap: 4rem;
 
     a {

@@ -4,6 +4,10 @@
   max-width: 60rem;
   margin: 0 auto;
   gap: 1rem;
+
+  input::placeholder {
+    color: lightgray;
+  }
 }
 
 .job-area {
