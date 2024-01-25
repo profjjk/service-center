@@ -8,8 +8,6 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     baseUrl = 'https://service-center-166ef71039d6.herokuapp.com/api/';
 }
 
-console.log(process.env.NODE_ENV, baseUrl);
-
 const config = { baseURL: baseUrl };
 
 export const axiosInstance = axios.create(config);
