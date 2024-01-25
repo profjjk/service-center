@@ -3,6 +3,7 @@ import { useUser, withMutation } from '../../components';
 import { useParts } from './hooks/useParts';
 import { Searchbar } from '../../features';
 import { Form, Table } from '../../layouts';
+import { formatPart } from '../../utils/format';
 
 const Inventory = ({ mutatePart }) => {
     const [ showForm, setShowForm ] = useState(false);
@@ -23,20 +24,32 @@ const Inventory = ({ mutatePart }) => {
     // EVENT HANDLERS
     const submitHandler = async (e, formData) => {
         e.preventDefault();
+        const partId = e.target.dataset.part;
+        const part = formatPart(formData);
+        const companyId = user.company;
 
+        if (submitType === 'edit') {
+            await mutatePart.edit.mutate({ id: partId, data: part });
+        } else {
+            part.company = companyId;
+            await mutatePart.add.mutate(part);
+        }
+        setSelected({ job: null, customer: null, part: null });
+        setShowForm(false);
     };
 
     const deleteHandler = async (e) => {
         e.preventDefault();
-
-    };
-
-    const increaseStock = async (e) => {
-        e.preventDefault();
-    };
-
-    const decreaseStock = async (e) => {
-        e.preventDefault();
+        const partId = e.target.dataset.id;
+        const confirmation = window.confirm(
+            'Are you sure you want to delete?' +
+            '\nThis cannot be undone.'
+        );
+        if (confirmation) {
+            await mutatePart.remove.mutate(partId);
+        }
+        setSelected({ job: null, customer: null, part: null });
+        setShowForm(false);
     };
 
     return (
@@ -62,8 +75,6 @@ const Inventory = ({ mutatePart }) => {
                             setSelected={setSelected}
                             setShowForm={setShowForm}
                             setSubmitType={setSubmitType}
-                            decreaseStock={decreaseStock}
-                            increaseStock={increaseStock}
                             headers={[ 'Part #', 'Description', 'In Stock' ]}
                             rows={applyFilter(parts)}
                         />

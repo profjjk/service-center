@@ -25,7 +25,16 @@ const formatCustomer = (formData) => {
     };
 };
 
+const formatPart = (formData) => {
+    return {
+        partNumber: formData.partNumber,
+        description: formData.description,
+        stock: parseInt(formData.stock)
+    };
+};
+
 export {
     formatJob,
-    formatCustomer
+    formatCustomer,
+    formatPart
 };

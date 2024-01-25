@@ -32,6 +32,7 @@ export const Form = ({
             id={'form'}
             data-customer={customer && customer?._id}
             data-job={job && job?._id}
+            data-part={part && part?._id}
             onSubmit={validateForm}
         >
             {(part || pathname === '/inventory') && <PartData part={part}/>}
@@ -225,11 +226,11 @@ const ButtonArea = ({ deleteHandler, setShowForm, setSelected, pathname, job, cu
                 Cancel
             </button>
 
-            {(job || customer) &&
+            {(job || customer || part) &&
                 (<button
                     className={'btn-form delete'}
-                    data-id={job ? job._id : customer._id}
-
+                    // data-id={job ? job._id : customer._id}
+                    data-id={determineId(job, customer, part)}
                     onClick={deleteHandler}
                 >
                     Delete
@@ -237,4 +238,16 @@ const ButtonArea = ({ deleteHandler, setShowForm, setSelected, pathname, job, cu
             }
         </div>
     );
+};
+
+const determineId = (job, customer, part) => {
+    if (job) {
+        return job._id;
+    }
+    if (customer) {
+        return customer._id;
+    }
+    if (part) {
+        return part._id;
+    }
 };
