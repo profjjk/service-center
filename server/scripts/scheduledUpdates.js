@@ -66,11 +66,13 @@ const insertParts = async (demoParts, companyId) => {
 };
 
 exports.runUpdates = () => {
-    const updateDemoData = cron.schedule('0 0 * * *', async () => {
+    // refresh demo data every Sunday at noon
+    const updateDemoData = cron.schedule('0 12 * * 0', async () => {
         try {
             const customers = await insertCustomers(demoCustomers, companyId);
             await insertJobs(demoJobs, companyId, customers);
             await insertParts(demoParts, companyId);
+            console.log(`Demo dated has been refreshed as of ${dayjs().format('MMM.DD.YYYY')} at ${dayjs().format('h:mma')}`);
         } catch (err) {
             console.error(err);
         }
