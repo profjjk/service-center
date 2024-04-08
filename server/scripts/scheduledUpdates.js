@@ -37,15 +37,15 @@ const insertJobs = async (demoJobs, companyId, customerArray) => {
     demoJobs[9].customer = new Types.ObjectId(customerArray.insertedIds[5]);
 
     // assign service dates to jobs based on current day
-    demoJobs[0].serviceDate = dayjs().subtract(20, 'day').format('YYYY-MM-DD');
-    demoJobs[1].serviceDate = dayjs().subtract(10, 'day').format('YYYY-MM-DD');
-    demoJobs[2].serviceDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
-    demoJobs[3].serviceDate = dayjs().subtract(15, 'day').format('YYYY-MM-DD');
-    demoJobs[4].serviceDate = dayjs().subtract(5, 'day').format('YYYY-MM-DD');
-    demoJobs[6].serviceDate = dayjs().add(3, 'day').format('YYYY-MM-DD');
-    demoJobs[7].serviceDate = dayjs().add(1, 'day').format('YYYY-MM-DD');
-    demoJobs[8].serviceDate = dayjs().add(3, 'day').format('YYYY-MM-DD');
-    demoJobs[9].serviceDate = dayjs().add(4, 'day').format('YYYY-MM-DD');
+    demoJobs[0].serviceDate = dayjs().subtract(20, 'day');
+    demoJobs[1].serviceDate = dayjs().subtract(10, 'day');
+    demoJobs[2].serviceDate = dayjs().add(2, 'day');
+    demoJobs[3].serviceDate = dayjs().subtract(15, 'day');
+    demoJobs[4].serviceDate = dayjs().subtract(5, 'day');
+    demoJobs[6].serviceDate = dayjs().add(3, 'day');
+    demoJobs[7].serviceDate = dayjs().add(1, 'day');
+    demoJobs[8].serviceDate = dayjs().add(5, 'day');
+    demoJobs[9].serviceDate = dayjs().add(4, 'day');
 
     try {
         await db.Job.deleteMany({ company: companyId });
@@ -66,7 +66,7 @@ const insertParts = async (demoParts, companyId) => {
 };
 
 exports.runUpdates = () => {
-    // refresh demo data every Sunday at noon
+    // refresh demo data every Sunday
     const updateDemoData = cron.schedule('0 12 * * 0', async () => {
         try {
             const customers = await insertCustomers(demoCustomers, companyId);
